@@ -1,6 +1,7 @@
 import Header from "../components/layouts/Header";
 import HeroSection from "../components/layouts/HeroSection";
 import AboutUs from "../components/layouts/AboutUs";
+import Features from "../components/layouts/Features";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Header />
       <HeroSection />
       <AboutUs />
+      <Features />
     </>
   );
 };
