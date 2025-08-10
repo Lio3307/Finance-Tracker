@@ -2,8 +2,8 @@ const HeroSection = () => {
   return (
     <>
       <section className="bg-white">
-        <div className="relative isolate px-6 pt-14 lg:px-8">
-          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 text-center">
+        <div className="relative isolate px-6 pt-10 lg:px-8">
+          <div className="mx-auto max-w-2xl py-20 sm:py-28 lg:py-32 text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Build your digital presence with confidence
             </h1>
@@ -23,8 +23,10 @@ const HeroSection = () => {
               </a>
             </div>
           </div>
-          <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 overflow-hidden blur-3xl">
-            <div className="w-[72rem] h-[40rem] mx-auto bg-gradient-to-tr from-pink-300 via-indigo-300 to-purple-300 opacity-30 rounded-full"></div>
+          <div className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 overflow-hidden blur-3xl">
+            <div className="w-[72rem] h-[35rem] mx-auto bg-gradient-to-tr from-pink-300 via-indigo-300 to-purple-300 opacity-30 rounded-full">
+                
+            </div>
           </div>
         </div>
       </section>
