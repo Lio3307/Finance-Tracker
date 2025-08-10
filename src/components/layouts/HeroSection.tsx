@@ -3,7 +3,7 @@ const HeroSection = () => {
     <>
       <section className="bg-white">
         <div className="relative isolate px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl py-[2rem] text-center">
+          <div className="mx-auto max-w-2xl py-[4rem] text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Build your digital presence with confidence
             </h1>

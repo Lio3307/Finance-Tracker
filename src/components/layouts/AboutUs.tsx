@@ -1,37 +1,35 @@
 const AboutUs = () => {
   return (
     <>
-      <section className="bg-white">
-        <div className="container mx-auto flex flex-col lg:flex-row items-center px-6 py-24">
-          <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-              Transform Ideas Into Reality
-            </h1>
-            <p className="text-lg text-gray-600">
-              Collaborate with our expert team to craft digital products that
-              delight and inspire your audience.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a
-                href="#"
-                className="bg-indigo-600 text-white px-5 py-3 rounded-md shadow hover:bg-indigo-500"
-              >
-                Get Started
-              </a>
-              <a
-                href="#"
-                className="border border-gray-300 px-5 py-3 rounded-md hover:bg-gray-50"
-              >
-                Our Work
-              </a>
-            </div>
-          </div>
-          <div className="lg:w-1/2 mt-10 lg:mt-0">
+      <section className="text-gray-400 bg-white body-font">
+        <div className="container mx-auto flex px-5 py-[6rem] md:flex-row flex-col items-center">
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10">
             <img
-              src="https://dummyimage.com/500x350"
-              alt="Hero Image"
-              className="rounded-lg shadow-lg"
+              className="object-cover object-center rounded"
+              alt="hero"
+              src="https://dummyimage.com/720x600"
             />
+          </div>
+          <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
+              Before they sold out
+              <br className="hidden lg:inline-block" />
+              readymade gluten
+            </h1>
+            <p className="mb-8 leading-relaxed">
+              Copper mug try-hard pitchfork pour-over freegan heirloom neutra
+              air plant cold-pressed tacos poke beard tote bag. Heirloom echo
+              park mlkshk tote bag selvage hot chicken authentic tumeric
+              truffaut hexagon try-hard chambray.
+            </p>
+            <div className="flex justify-center">
+              <button className="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">
+                Button
+              </button>
+              <button className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">
+                Button
+              </button>
+            </div>
           </div>
         </div>
       </section>
