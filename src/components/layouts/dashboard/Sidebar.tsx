@@ -14,7 +14,7 @@ export default function Sidebar({ children, getPath }: Props) {
   return (
     <div className="h-screen bg-white text-gray-800 flex flex-col">
       {/* mobile top bar */}
-      <div className="md:hidden sticky top-0 z-50  flex items-center justify-between px-4 py-3 ">
+      <div className="md:hidden sticky top-0 z-50 w-[1.4rem]  flex items-center bg-indigo-600 justify-between pl-4 my-3 ">
         <button
           onClick={() => setOpen(true)}
           aria-label="Open menu"
