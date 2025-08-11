@@ -1,23 +1,26 @@
 const SignUp = () => {
   return (
     <>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font bg-gradient-to-b from-indigo-50 to-white">
         <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
           <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-            <h1 className="title-font font-medium text-3xl text-gray-900">
-              Slow-carb next level shoindcgoitch ethical authentic, poko
-              scenester
+            <h1 className="title-font font-bold text-4xl md:text-5xl text-gray-900 leading-tight">
+              Take Control of Your Finances Today
             </h1>
-            <p className="leading-relaxed mt-4">
-              Poke slow-carb mixtape knausgaard, typewriter street art gentrify
-              hammock starladder roathse. Craies vegan tousled etsy austin.
+            <p className="leading-relaxed mt-6 text-lg text-gray-700">
+              Track your expenses, set budgets, and achieve your financial goals
+              with <span className="font-semibold text-indigo-600">FinT</span>.
+              Sign up now and start managing your money smarter — all in one
+              place.
             </p>
           </div>
-          <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-            <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
-              Sign Up
+
+          <div className="lg:w-2/6 md:w-1/2 bg-white rounded-xl shadow-xl p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 border border-gray-100">
+            <h2 className="text-gray-900 text-2xl font-bold title-font mb-6 text-center">
+              Create Your Free Account
             </h2>
-            <div className="relative mb-4">
+
+            <div className="relative mb-5">
               <label className="leading-7 text-sm text-gray-600">
                 Full Name
               </label>
@@ -25,23 +28,43 @@ const SignUp = () => {
                 type="text"
                 id="full-name"
                 name="full-name"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                placeholder="John Doe"
+                className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
-            <div className="relative mb-4">
+
+            <div className="relative mb-6">
               <label className="leading-7 text-sm text-gray-600">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                placeholder="you@example.com"
+                className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
-            <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Button
+
+            <button className="flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none hover:from-indigo-600 hover:to-indigo-800 rounded-lg text-lg shadow-md transition-all">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Sign Up
             </button>
-            <p className="text-xs text-gray-500 mt-3">
-              Literally you probably haven't heard of them jean shorts.
+
+            <p className="text-xs text-gray-500 mt-4 text-center">
+              Your financial data is encrypted and secure. You can delete your
+              account anytime.
             </p>
           </div>
         </div>
