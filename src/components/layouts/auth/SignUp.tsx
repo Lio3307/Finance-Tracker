@@ -2,7 +2,7 @@ const SignUp = () => {
   return (
     <>
       <section className="text-gray-600 body-font bg-gradient-to-b from-indigo-50 to-white">
-        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+        <div className="container px-5 py-[3.2rem] mx-auto flex flex-wrap items-center">
           <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
             <h1 className="title-font font-bold text-4xl md:text-5xl text-gray-900 leading-tight">
               Take Control of Your Finances Today
@@ -40,6 +40,16 @@ const SignUp = () => {
                 id="email"
                 name="email"
                 placeholder="you@example.com"
+                className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <label className="leading-7 text-sm text-gray-600">Password</label>
+              <input
+                type="password"
+                id="pasword"
+                name="pasword"
                 className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
