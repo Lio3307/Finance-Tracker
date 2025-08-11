@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,9 +60,9 @@ const Header = () => {
             isOpen ? "flex" : "hidden"
           } md:flex w-full md:w-auto justify-center md:justify-end mt-4 md:mt-0`}
         >
-          <button className="px-6 py-2 bg-indigo-500 hover:cursor-pointer hover:bg-indigo-600 text-white rounded-lg shadow-lg">
+          <Link to={"/signUp"} className="px-6 py-2 bg-indigo-500 hover:cursor-pointer hover:bg-indigo-600 text-white rounded-lg shadow-lg">
             Try Now
-          </button>
+          </Link>
         </div>
       </div>
     </header>
