@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const SignUp = () => {
   return (
     <>
       <section className="text-gray-600 body-font bg-gradient-to-b from-indigo-50 to-white">
-        <div className="container px-5 py-[3.2rem] mx-auto flex flex-wrap items-center">
+        <div className="container px-5 pt-[3rem] mx-auto flex flex-wrap items-center">
           <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
             <h1 className="title-font font-bold text-4xl md:text-5xl text-gray-900 leading-tight">
               Take Control of Your Finances Today
@@ -45,13 +47,29 @@ const SignUp = () => {
             </div>
 
             <div className="relative mb-6">
-              <label className="leading-7 text-sm text-gray-600">Password</label>
+              <label className="leading-7 text-sm text-gray-600">
+                Password
+              </label>
               <input
                 type="password"
                 id="pasword"
                 name="pasword"
                 className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
               />
+            </div>
+
+            <div className="flex items-center gap-2 mb-4">
+              <input
+                type="checkbox"
+                id="show-password"
+                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+              />
+              <label
+                htmlFor="show-password"
+                className="text-sm text-gray-600 cursor-pointer"
+              >
+                Show password
+              </label>
             </div>
 
             <button className="flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none hover:from-indigo-600 hover:to-indigo-800 rounded-lg text-lg shadow-md transition-all">
@@ -72,9 +90,14 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <p className="text-xs text-gray-500 mt-4 text-center">
-              Your financial data is encrypted and secure. You can delete your
-              account anytime.
+            <p className="text-xs text-gray-500 mt-6 text-center">
+              Already have an account?{" "}
+              <Link
+                to={"/signIn"}
+                className="font-medium text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
+              >
+                Sign In
+              </Link>
             </p>
           </div>
         </div>
