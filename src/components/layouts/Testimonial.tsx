@@ -10,8 +10,10 @@ const Testimonial = () => {
             Discover how our service can benefit you
           </p>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 w-full">
-          <div className="border p-7 rounded-xl bg-white  drop-shadow-md border-neutral-200/50 col-span-2 flex flex-col gap-y-10 justify-between">
+
+          <div className="border p-7 rounded-xl bg-white  drop-shadow-md border-neutral-200/50 col-span-2 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-y-10 justify-between">
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl">Brilliant house to rent</p>
               <p className="font-medium text-slate-600">
@@ -31,7 +33,8 @@ const Testimonial = () => {
               </p>
             </div>
           </div>
-          <div className="border p-7 rounded-xl bg-white  drop-shadow-md border-neutral-200/50 col-span-3 flex flex-col gap-y-10 justify-between">
+
+          <div className="border p-7 rounded-xl bg-white  drop-shadow-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-neutral-200/50 col-span-3 flex flex-col gap-y-10 justify-between">
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl">Efficient customer support</p>
               <p className="font-medium text-slate-600">
@@ -52,7 +55,8 @@ const Testimonial = () => {
               </p>
             </div>
           </div>
-          <div className="border p-7 rounded-xl bg-white drop-shadow-md border-neutral-200/50 col-span-3 flex flex-col gap-y-10 justify-between">
+
+          <div className="border p-7 rounded-xl bg-white drop-shadow-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-neutral-200/50 col-span-3 flex flex-col gap-y-10 justify-between">
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl">Seamless integration process</p>
               <p className="font-medium text-slate-600">
@@ -73,7 +77,8 @@ const Testimonial = () => {
               </p>
             </div>
           </div>
-          <div className="border p-7 rounded-xl bg-white drop-shadow-md border-neutral-200/50 col-span-2 flex flex-col gap-y-10 justify-between">
+
+          <div className="border p-7 rounded-xl bg-white drop-shadow-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-neutral-200/50 col-span-2 flex flex-col gap-y-10 justify-between">
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl">Reliable service uptime</p>
               <p className="font-medium text-slate-600">
