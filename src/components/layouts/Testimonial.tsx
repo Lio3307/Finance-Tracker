@@ -99,6 +99,11 @@ const Testimonial = () => {
             </div>
           </div>
         </div>
+        <div className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 overflow-hidden blur-3xl">
+            <div className="w-[72rem] h-[50rem] mx-auto bg-gradient-to-tr from-pink-300 via-indigo-300 to-purple-300 opacity-30 rounded-full">
+                
+            </div>
+          </div>
       </section>
     </>
   );
