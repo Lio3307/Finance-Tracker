@@ -4,6 +4,7 @@ import SignUp from "./components/layouts/auth/SignUp";
 import SignIn from "./components/layouts/auth/SignIn";
 import Dashboard from "./pages/Dashboard";
 import DashboardHome from "./components/layouts/dashboard/DashboardHome";
+import Transaction from "./components/layouts/dashboard/Transaction";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<DashboardHome/>}/>
+          <Route path="transaction" element={<Transaction/>}/>
         </Route>
       </Routes>
     </>

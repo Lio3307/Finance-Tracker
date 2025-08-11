@@ -9,12 +9,12 @@ type Props = {
 export default function Sidebar({ children, getPath }: Props) {
   const [open, setOpen] = useState(false);
 
-  const navItems = [{ name: "Overview", to: "home" }];
+  const navItems = [{ name: "Overview", to: "home" }, {name: "Transaction", to: "transaction"}];
 
   return (
     <div className="h-screen bg-white text-gray-800 flex flex-col">
       {/* mobile top bar */}
-      <div className="md:hidden sticky top-0 z-50 bg-white flex items-center justify-between px-4 py-3 border-b border-gray-200">
+      <div className="md:hidden sticky top-0 z-50  flex items-center justify-between px-4 py-3 ">
         <button
           onClick={() => setOpen(true)}
           aria-label="Open menu"
@@ -35,12 +35,6 @@ export default function Sidebar({ children, getPath }: Props) {
           </svg>
         </button>
 
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">
-            F
-          </div>
-          <span className="font-semibold">FinT</span>
-        </div>
       </div>
 
       {/* mobile menu backdrop */}
@@ -117,15 +111,6 @@ export default function Sidebar({ children, getPath }: Props) {
               </Link>
             ))}
           </nav>
-
-          <div className="mt-auto px-4 py-4 border-t border-gray-100">
-            <a
-              href="#"
-              className="block px-3 py-2 text-sm text-gray-700 hover:bg-indigo-50"
-            >
-              Help Center
-            </a>
-          </div>
         </aside>
 
         {/* main content */}
