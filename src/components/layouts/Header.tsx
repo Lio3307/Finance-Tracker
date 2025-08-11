@@ -7,7 +7,7 @@ const Header = () => {
       <div className="container mx-auto flex flex-wrap p-5 items-center justify-between">
         <div className="flex items-center justify-between w-full md:w-auto">
           <a className="flex title-font font-medium items-center text-gray-900">
-            <span className="ml-3 text-2xl font-bold">GlassUI</span>
+            <span className="ml-3 text-2xl font-bold">FinT</span>
           </a>
           <button
             className="md:hidden text-gray-700"
