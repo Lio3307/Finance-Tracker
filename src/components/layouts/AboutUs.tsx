@@ -1,7 +1,7 @@
 const AboutUs = () => {
   return (
     <>
-      <section className="text-gray-400 bg-white body-font">
+      <section className="text-gray-400 bg-transparent relative z-30 body-font">
         <div className="container mx-auto flex px-5 py-[8rem] md:flex-row flex-col items-center">
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10">
             <img

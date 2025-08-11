@@ -1,7 +1,7 @@
 const Testimonial = () => {
   return (
     <>
-      <section className="max-w-5xl mx-auto w-full px-10 bg-white text-black py-[5rem]">
+      <section className="relative z-30 max-w-5xl mx-auto w-full px-10 bg-transparent text-black py-[5rem]">
         <div className="flex items-center justify-center flex-col gap-y-2 py-5">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">
             Testimonials
