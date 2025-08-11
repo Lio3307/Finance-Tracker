@@ -1,10 +1,11 @@
 import Sidebar from "../components/layouts/dashboard/Sidebar";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <>
       <Sidebar>
-        <h2>Hello</h2>
+        <Outlet />
       </Sidebar>
     </>
   );
