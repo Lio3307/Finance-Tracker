@@ -8,10 +8,11 @@ const Features = () => {
               WHY CHOOSE US
             </span>
             <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
-              Our Key Features
+              Powerful Finance Tracking Features
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
-              Discover what makes our product stand out from the competition.
+              Tools and insights designed to help you take control of your money
+              and reach your financial goals.
             </p>
           </div>
 
@@ -29,11 +30,11 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Lightning Fast
+                Instant Expense Tracking
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Optimized for performance with load times under 2 seconds,
-                ensuring your users never wait.
+                Log your expenses and incomes in seconds, keeping your records
+                always up to date.
               </p>
             </div>
 
@@ -50,11 +51,11 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Secure by Design
+                Bank-Level Security
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Enterprise-grade security with end-to-end encryption and regular
-                penetration testing.
+                Your financial data is encrypted and securely stored, ensuring
+                complete privacy.
               </p>
             </div>
 
@@ -71,11 +72,11 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Intuitive Interface
+                Simple & Clear Dashboard
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Designed for humans with thoughtful UX patterns that reduce
-                learning curves.
+                Easily navigate your income, expenses, and savings with our
+                user-friendly interface.
               </p>
             </div>
 
@@ -92,11 +93,11 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                24/7 Support
+                24/7 Financial Support
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Our award-winning support team is available around the clock to
-                assist you.
+                Get help anytime from our expert support team for your finance
+                tracking needs.
               </p>
             </div>
 
@@ -113,11 +114,10 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Regular Updates
+                Regular Feature Upgrades
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Continuous improvements with new features released every two
-                weeks.
+                Stay ahead with new tools and reports added every two weeks.
               </p>
             </div>
 
@@ -134,11 +134,10 @@ const Features = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                99.9% Uptime
+                Reliable Data Access
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Guaranteed reliability with our distributed cloud
-                infrastructure.
+                Access your financial data anytime with 99.9% uptime guaranteed.
               </p>
             </div>
           </div>
