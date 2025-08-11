@@ -1,11 +1,11 @@
-import Header from "../components/layouts/Header";
-import HeroSection from "../components/layouts/HeroSection";
-import AboutUs from "../components/layouts/AboutUs";
-import Features from "../components/layouts/Features";
-import Testimonial from "../components/layouts/Testimonial";
-import Faq from "../components/layouts/Faq";
-import Footer from "../components/layouts/Footer";
-import CTA from "../components/layouts/CTA";
+import Header from "../components/layouts/Home/Header";
+import HeroSection from "../components/layouts/Home/HeroSection";
+import AboutUs from "../components/layouts/Home/AboutUs";
+import Features from "../components/layouts/Home/Features";
+import Testimonial from "../components/layouts/Home/Testimonial";
+import Faq from "../components/layouts/Home/Faq";
+import Footer from "../components/layouts/Home/Footer";
+import CTA from "../components/layouts/Home/CTA";
 
 const Home = () => {
   return (
