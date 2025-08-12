@@ -1,3 +1,5 @@
+import Modals from "./Modals";
+
 const DashboardHome = () => {
   return (
     <>
@@ -44,7 +46,11 @@ const DashboardHome = () => {
           </span>
         </div>
       </div>
-
+      
+      <div className="flex my-[2rem]">
+        <Modals/>
+      </div>
+      
       {/* Table */}
       <div className="overflow-x-auto mt-6">
         <table className="min-w-full divide-y divide-gray-200">
