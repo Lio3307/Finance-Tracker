@@ -38,6 +38,7 @@ const Modals = () => {
       await updateDoc(transactionColl, {
         transactionId: transactionColl.id
       })
+      setLoading(false)
     } catch (err) {
       throw new Error("Cannot add transaction : " + err);
     }
