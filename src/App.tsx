@@ -13,6 +13,8 @@ function App() {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
         window.location.href = "/dashboard/home";
+      } else {
+        return;
       }
     });
 

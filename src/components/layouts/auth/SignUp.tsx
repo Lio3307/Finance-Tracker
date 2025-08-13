@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [fullname, setFullname] = useState<string>("");
+
   return (
     <>
       <section className="text-gray-600 body-font bg-gradient-to-b from-indigo-50 to-white">
@@ -27,6 +32,12 @@ const SignUp = () => {
                 Full Name
               </label>
               <input
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setFullname(e.target.value);
+                }}
+                value={fullname}
                 type="text"
                 id="full-name"
                 name="full-name"
@@ -38,6 +49,12 @@ const SignUp = () => {
             <div className="relative mb-6">
               <label className="leading-7 text-sm text-gray-600">Email</label>
               <input
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setEmail(e.target.value);
+                }}
+                value={email}
                 type="email"
                 id="email"
                 name="email"
@@ -51,6 +68,12 @@ const SignUp = () => {
                 Password
               </label>
               <input
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setPassword(e.target.value);
+                }}
+                value={password}
                 type="password"
                 id="pasword"
                 name="pasword"
