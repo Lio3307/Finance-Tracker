@@ -1,25 +1,30 @@
 import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { create } from "zustand";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, Firestore, setDoc } from "firebase/firestore";
+import type { Auth } from "firebase/auth";
 
 const useAuth = create((set) => ({
   loading: false,
-  signUpWithEmail: async function (auth, db, email, password, fullName) {
+  signUpWithEmail: async function (auth: Auth, db: Firestore, email: string, password: string, fullName: string) {
     try {
       set({ loading: true });
-      await createUserWithEmailAndPassword(auth, email, password);
-      const docRef = doc(db, "Users", auth?.currentUser.id);
+      const userCredit = await createUserWithEmailAndPassword(auth, email, password);
+      if(userCredit){
+        const userId = userCredit.user.uid
+      const docRef = doc(db, "Users", userId);
       await setDoc(docRef, {
         fullName,
         email,
-        userId: auth?.currentUser.id,
+        userId,
       });
+    }
       set({ loading: false });
     } catch (err) {
       throw new Error("Cannot create user account! : " + err);
     }
   },
-  signInWithEmail: async function (auth, email, password) {
+  signInWithEmail: async function (auth: Auth, email: string, password: string) {
     try {
       set({ loading: true });
       await signInWithEmailAndPassword(auth, email, password);
@@ -29,3 +34,5 @@ const useAuth = create((set) => ({
     }
   },
 }));
+
+export default useAuth;
