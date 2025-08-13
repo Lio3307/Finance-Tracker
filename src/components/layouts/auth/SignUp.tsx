@@ -7,6 +7,7 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [fullname, setFullname] = useState<string>("");
+  const [showPass, setShowPass] = useState<boolean>(false)
 
   const {signUpWithEmail, loading} = useAuth()
 
@@ -86,7 +87,7 @@ const SignUp = () => {
                   setPassword(e.target.value);
                 }}
                 value={password}
-                type="password"
+                type={showPass ? "text": 'password'}
                 id="pasword"
                 name="pasword"
                 className="w-full bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
@@ -96,6 +97,10 @@ const SignUp = () => {
             <div className="flex items-center gap-2 mb-4">
               <input
                 type="checkbox"
+                onChange={(e) => {
+                  e.stopPropagation()
+                  setShowPass(prev => !prev)
+                }}
                 id="show-password"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
               />
@@ -129,7 +134,7 @@ const SignUp = () => {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              {loading ? "SignIn..." : "SignIn"}
+              {loading ? "Creating..." : "Sign Up"}
             </button>
 
             <p className="text-xs text-gray-500 mt-6 text-center">
