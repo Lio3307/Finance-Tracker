@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, auth } from "../../../config/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 
 const Modals = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,13 +28,16 @@ const Modals = () => {
         auth.currentUser?.uid,
         "Transaction"
       );
-      await addDoc(collRef, {
+      const transactionColl = await addDoc(collRef, {
         userId: auth.currentUser.uid,
         name,
         context,
         amount,
         type,
       });
+      await updateDoc(transactionColl, {
+        transactionId: transactionColl.id
+      })
     } catch (err) {
       throw new Error("Cannot add transaction : " + err);
     }
