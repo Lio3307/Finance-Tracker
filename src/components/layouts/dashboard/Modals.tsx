@@ -77,6 +77,10 @@ const Modals = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
+                setName("")
+                setContext("")
+                setAmount(0)
+                setType("")
                 setIsOpen(false);
               }}
             >
