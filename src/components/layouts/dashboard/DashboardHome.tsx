@@ -4,7 +4,6 @@ import TableTransaction from "./TableTransaction";
 const DashboardHome = () => {
   return (
     <>
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-[3rem] md:mt-0 gap-4 mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
