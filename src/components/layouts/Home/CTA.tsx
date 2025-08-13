@@ -17,7 +17,7 @@ const CTA = () => {
             </div>
 
             <div className="flex-shrink-0">
-              <Link to={"/signUp"} className="relative hover:cursor-pointer inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-indigo-600 hover:to-blue-700">
+              <Link to={"/auth/signUp"} className="relative hover:cursor-pointer inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-indigo-600 hover:to-blue-700">
                 <span>Get Started</span>
                 <svg
                   className="w-6 h-6 ml-3"

@@ -25,7 +25,7 @@ const AboutUs = () => {
               truffaut hexagon try-hard chambray.
             </p>
             <div className="flex justify-center">
-              <Link to={"/signUp"} className="inline-flex text-black hover:text-white hover:cursor-pointer outline-2 outline-sky-500 bg-transparent border-0 py-2 px-[2.7rem] focus:outline-none hover:bg-sky-500 rounded text-lg">
+              <Link to={"/auth/signUp"} className="inline-flex text-black hover:text-white hover:cursor-pointer outline-2 outline-sky-500 bg-transparent border-0 py-2 px-[2.7rem] focus:outline-none hover:bg-sky-500 rounded text-lg">
                 Get Started
               </Link>
             </div>

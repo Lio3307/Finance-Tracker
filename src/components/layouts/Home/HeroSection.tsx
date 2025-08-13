@@ -14,7 +14,7 @@ const HeroSection = () => {
               and easy-to-use financial tool.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link to={"/signUp"} className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500">
+              <Link to={"/auth/signUp"} className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500">
               Get Started →
               </Link>
             </div>

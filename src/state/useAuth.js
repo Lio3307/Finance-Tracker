@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
 import { create } from "zustand";
 import { doc, setDoc } from "firebase/firestore";
-import loading from "daisyui/components/loading";
 
 const useAuth = create((set) => ({
   loading: false,
@@ -26,7 +25,7 @@ const useAuth = create((set) => ({
       await signInWithEmailAndPassword(auth, email, password);
       set({ loading: false });
     } catch (err) {
-      throw new Error("Cannot sign In : " + error);
+      throw new Error("Cannot sign In : " + err);
     }
   },
 }));
