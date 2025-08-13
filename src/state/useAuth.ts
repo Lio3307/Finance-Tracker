@@ -1,10 +1,24 @@
-import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { create } from "zustand";
 import { doc, Firestore, setDoc } from "firebase/firestore";
-import type { Auth } from "firebase/auth";
+import { type Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 
-const useAuth = create((set) => ({
+interface AuthStore {
+  loading: boolean;
+  signUpWithEmail: (
+    auth: Auth,
+    db: Firestore,
+    email: string,
+    password: string,
+    fullName: string
+  ) => Promise<void>;
+  signInWithEmail: (
+    auth: Auth,
+    email: string,
+    password: string
+  ) => Promise<void>;
+}
+
+const useAuth = create<AuthStore>((set) => ({
   loading: false,
   signUpWithEmail: async function (auth: Auth, db: Firestore, email: string, password: string, fullName: string) {
     try {

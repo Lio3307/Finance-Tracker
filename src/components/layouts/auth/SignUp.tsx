@@ -1,10 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../state/useAuth";
+import { auth, db } from "../../../config/firebase";
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [fullname, setFullname] = useState<string>("");
+
+  const {signUpWithEmail, loading} = useAuth()
+
+  const handleSignUp = async() => {
+    try {
+      await signUpWithEmail(auth, db, email, password, fullname)
+    } catch (err) {
+      throw new Error("Cannot sign Up" + err)
+    }
+  }
 
   return (
     <>
@@ -95,7 +107,14 @@ const SignUp = () => {
               </label>
             </div>
 
-            <button className="flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none hover:from-indigo-600 hover:to-indigo-800 rounded-lg text-lg shadow-md transition-all">
+            <button 
+            onClick={(e) => {
+              e.stopPropagation()
+              e.preventDefault()
+              handleSignUp()
+            }}
+            disabled={loading}
+            className={`flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${loading ? 'hover:cursor-not-allowed': 'hover:from-indigo-600 hover:to-indigo-800'} rounded-lg text-lg shadow-md transition-all`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -110,7 +129,7 @@ const SignUp = () => {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              Sign Up
+              {loading ? "SignIn..." : "SignIn"}
             </button>
 
             <p className="text-xs text-gray-500 mt-6 text-center">

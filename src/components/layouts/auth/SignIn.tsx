@@ -1,6 +1,30 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import useAuth from "../../../state/useAuth";
+import { auth } from "../../../config/firebase";
 
 const SignIn = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const { signInWithEmail, loading } = useAuth();
+
+  const hanldeSignIn = async () => {
+    if (!email.trim() || !password.trim()) {
+      alert("Input field cannot empty!!");
+      return;
+    }
+    if (password.length < 6) {
+      alert("password at least 6 character!!");
+      return;
+    }
+    try {
+      await signInWithEmail(auth, email, password);
+    } catch (err) {
+      throw new Error("Cannot SignIn" + err);
+    }
+  };
+
   return (
     <>
       <section className="text-gray-600 body-font bg-gradient-to-b from-indigo-50 to-white">
@@ -17,6 +41,12 @@ const SignIn = () => {
             <div className="relative mb-5">
               <label className="leading-7 text-sm text-gray-600">Email</label>
               <input
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setEmail(e.target.value);
+                }}
+                value={email}
                 type="email"
                 id="signin-email"
                 name="signin-email"
@@ -30,6 +60,12 @@ const SignIn = () => {
                 Password
               </label>
               <input
+                onChange={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setPassword(e.target.value);
+                }}
+                value={password}
                 type="password"
                 id="signin-password"
                 name="signin-password"
@@ -52,7 +88,15 @@ const SignIn = () => {
               </label>
             </div>
 
-            <button className="mt-[0.4rem] w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none hover:from-indigo-600 hover:to-indigo-800 rounded-lg text-lg shadow-md transition-all">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                hanldeSignIn();
+              }}
+              disabled={loading}
+              className={`mt-[0.4rem] w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${loading ? 'hover:cursor-not-allowed' : 'hover:from-indigo-600 hover:to-indigo-800'} rounded-lg text-lg shadow-md transition-all`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
