@@ -7,11 +7,11 @@ const Modals = () => {
   const [name, setName] = useState<string>("");
   const [context, setContext] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
-  const [type, setType] = useState<string>("");
+  const [type, setType] = useState<string>("Income");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleTransaction = async () => {
-    if (!name.trim() || !context.trim()) {
+    if (!name.trim() || !context.trim() || !amount) {
       alert("input field cannot empty!!");
       return;
     }
@@ -36,9 +36,11 @@ const Modals = () => {
         type,
       });
       await updateDoc(transactionColl, {
-        transactionId: transactionColl.id
-      })
-      setLoading(false)
+        transactionId: transactionColl.id,
+      });
+      alert("Successfully add transaction!");
+      setIsOpen(false);
+      setLoading(false);
     } catch (err) {
       throw new Error("Cannot add transaction : " + err);
     }
@@ -77,10 +79,10 @@ const Modals = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                setName("")
-                setContext("")
-                setAmount(0)
-                setType("")
+                setName("");
+                setContext("");
+                setAmount(0);
+                setType("");
                 setIsOpen(false);
               }}
             >
@@ -154,8 +156,10 @@ const Modals = () => {
                 <button
                   disabled={loading}
                   className={`px-6 py-3 rounded-md bg-indigo-200 text-indigo-700 text-sm font-medium ${
-                    loading ? "cursor-not-allowed" : "hover:bg-indigo-300"
-                  } flex-1 sm:flex-none cursor-pointer`}
+                    loading
+                      ? "cursor-not-allowed"
+                      : "hover:bg-indigo-300 cursor-pointer"
+                  } flex-1 sm:flex-none `}
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
