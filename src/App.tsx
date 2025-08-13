@@ -11,7 +11,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth/:auth" element={<Auth />} />
+        <Route path="/auth/:authType" element={<Auth />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<DashboardHome />} />
           <Route path="transaction" element={<Transaction />} />

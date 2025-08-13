@@ -25,12 +25,12 @@ const useAuth = create<AuthStore>((set) => ({
       set({ loading: true });
       const userCredit = await createUserWithEmailAndPassword(auth, email, password);
       if(userCredit){
-        const userId = userCredit.user.uid
-      const docRef = doc(db, "Users", userId);
+        const userId = userCredit.user
+      const docRef = doc(db, "Users", userId.uid);
       await setDoc(docRef, {
         fullName,
         email,
-        userId,
+        userId: userId.uid,
       });
     }
       set({ loading: false });
