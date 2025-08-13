@@ -119,7 +119,7 @@ const SignUp = () => {
               handleSignUp()
             }}
             disabled={loading}
-            className={`flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${loading ? 'hover:cursor-not-allowed': 'hover:from-indigo-600 hover:to-indigo-800'} rounded-lg text-lg shadow-md transition-all`}>
+            className={`flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${loading ? 'hover:cursor-not-allowed': 'hover:from-indigo-600 hover:to-indigo-800 cursor-pointer'} rounded-lg text-lg shadow-md transition-all`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

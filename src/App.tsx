@@ -4,22 +4,8 @@ import Dashboard from "./pages/Dashboard";
 import DashboardHome from "./components/layouts/dashboard/DashboardHome";
 import Transaction from "./components/layouts/dashboard/Transaction";
 import Auth from "./pages/Auth";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./config/firebase";
 
 function App() {
-  useEffect(() => {
-    const unsubs = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        window.location.href = "/dashboard/home";
-      } else {
-        return;
-      }
-    });
-
-    return () => unsubs();
-  }, []);
 
   return (
     <>
