@@ -11,7 +11,7 @@ export default function Sidebar({ children, getPath }: Props) {
 
   const navItems = [
     { name: "Overview", to: "home" },
-    { name: "Transaction", to: "transaction" },
+    { name: "Target", to: "target" },
   ];
 
   return (

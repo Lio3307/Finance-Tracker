@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import DashboardHome from "./components/layouts/dashboard/DashboardHome";
-import Transaction from "./components/layouts/dashboard/Transaction";
 import Auth from "./pages/Auth";
 import EditTransaction from "./components/layouts/dashboard/EditTransaction";
+import Target from "./components/layouts/dashboard/Target";
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
         <Route path="/auth/:authType" element={<Auth />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<DashboardHome />} />
-          <Route path="transaction" element={<Transaction />} />
+          <Route path="target" element={<Target />} />
           <Route path="edit/:editId" element={<EditTransaction/>}/>
         </Route>
       </Routes>
