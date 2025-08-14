@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import DashboardHome from "./components/layouts/dashboard/DashboardHome";
 import Transaction from "./components/layouts/dashboard/Transaction";
 import Auth from "./pages/Auth";
+import EditTransaction from "./components/layouts/dashboard/EditTransaction";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<DashboardHome />} />
           <Route path="transaction" element={<Transaction />} />
+          <Route path="edit/:editId" element={<EditTransaction/>}/>
         </Route>
       </Routes>
     </>
