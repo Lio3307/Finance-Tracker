@@ -12,10 +12,8 @@ const Target = () => {
       <div className="w-full h-1 bg-indigo-500 rounded-full my-8"></div>
 
       <div className="flex flex-wrap">
-        <div className=" text-[1.6rem] border-2 hover:text-white hover:bg-indigo-600 cursor-pointer border-indigo-800 text-black font-bold py-[4rem] px-[4.3rem] rounded-[1.2rem]">
-          +
-        </div>
         
+
       </div>
     </>
   );
