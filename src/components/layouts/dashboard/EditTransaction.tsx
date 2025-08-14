@@ -2,22 +2,55 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import type { TransactionData } from "../../../type";
 
 const EditTransaction = () => {
   const { editId } = useParams();
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [editing, setEditing] = useState<boolean>(false);
+
+  const [userId, setUserId] = useState<string>("");
 
   const [newName, setNewName] = useState<string>("");
   const [newContext, setNewContext] = useState<string>("");
   const [newAmount, setNewAmount] = useState<number>(0);
 
+  const handlerEdit = async () => {
+    if (!newName.trim() || !newContext.trim() || !newAmount) {
+      alert("Input Field cannot empty!!");
+      return;
+    }
+
+    try {
+      setEditing(true);
+      if (!editId) {
+        return (
+          <p className="mt-[4rem] text-[2rem] font-bold text-center">
+            Transaction data unavaible!
+          </p>
+        );
+      }
+
+      const docRef = doc(db, "Users", userId, "Transaction", editId);
+      await updateDoc(docRef, {
+        name: newName,
+        context: newContext,
+        amount: newAmount,
+      });
+      setEditing(false);
+      alert("Data successfully updated!!");
+    } catch (err) {
+      throw new Error(`Cannot update data : ${err}`);
+    }
+  };
+
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          setUserId(user.uid);
           if (!editId) {
             return (
               <p className="mt-[4rem] text-[2rem] font-bold text-center">
@@ -59,10 +92,10 @@ const EditTransaction = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center p-6 bg-gray-100 min-h-screen">
+        <div className="flex justify-center p-6">
           <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md my-auto border border-gray-200">
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-              Tambah Transaksi Baru
+              Update Transaction
             </h2>
 
             <div className="space-y-5">
@@ -82,6 +115,7 @@ const EditTransaction = () => {
                     setNewName(e.target.value);
                   }}
                   type="text"
+                  required
                   className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
                   placeholder="Set new name"
                 />
@@ -103,6 +137,7 @@ const EditTransaction = () => {
                     setNewContext(e.target.value);
                   }}
                   type="text"
+                  required
                   className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
                   placeholder="Set new context"
                 />
@@ -127,6 +162,24 @@ const EditTransaction = () => {
                   className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
                   placeholder="Set new amount"
                 />
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  disabled={editing}
+                  className={`px-6 py-3 rounded-md bg-indigo-200 text-indigo-700 text-sm font-medium ${
+                    editing
+                      ? "cursor-not-allowed"
+                      : "hover:bg-indigo-300 cursor-pointer"
+                  } flex-1 sm:flex-none `}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handlerEdit();
+                  }}
+                >
+                  Update
+                </button>
               </div>
             </div>
           </div>
