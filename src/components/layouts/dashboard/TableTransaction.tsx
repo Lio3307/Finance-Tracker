@@ -9,15 +9,19 @@ import {
 } from "firebase/firestore";
 import { type TransactionData } from "../../../type";
 import { Link } from "react-router-dom";
+import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
 
 const TableTransaction = () => {
   const [dataUser, setDataUSer] = useState<Array<TransactionData>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [idUser, setIdUser] = useState<string>("")
+  const deleteTransaction = useDeleteTransaction(idUser)
 
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          setIdUser(user.uid)
           setLoading(true);
           const collRef = collection(db, "Users", user.uid, "Transaction");
           const collSnap = await getDocs(collRef);
@@ -128,6 +132,12 @@ const TableTransaction = () => {
                       </svg>
                     </Link>
                     <button
+
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      deleteTransaction(data.transactionId)
+                    }}
                       className="p-2 font-medium text-white cursor-pointer bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 ease-in-out shadow-sm"
                       aria-label="Delete"
                     >
