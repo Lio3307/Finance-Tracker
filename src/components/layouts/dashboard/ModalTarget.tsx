@@ -77,7 +77,7 @@ const ModalTarget = () => {
               X
             </button>
 
-            <h1 className="text-lg font-bold mb-4">New Transaction</h1>
+            <h1 className="text-lg font-bold mb-4">New Target</h1>
 
             <div className="space-y-3">
               <label className="block text-sm font-bold text-gray-700">

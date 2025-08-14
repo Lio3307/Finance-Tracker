@@ -1,3 +1,5 @@
+import ModalTarget from "./ModalTarget";
+
 const Target = () => {
   return (
     <>
@@ -9,11 +11,10 @@ const Target = () => {
         dolores. Molestias, iste quam?
       </p>
 
-      <div className="w-full h-1 bg-indigo-500 rounded-full my-8"></div>
+      <div className="w-full h-1 bg-indigo-500 rounded-full my-7"></div>
 
       <div className="flex flex-wrap">
-        
-
+        <ModalTarget/>
       </div>
     </>
   );
