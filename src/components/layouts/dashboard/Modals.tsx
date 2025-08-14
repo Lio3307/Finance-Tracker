@@ -153,6 +153,8 @@ const Modals = () => {
               </select>
               <br />
 
+              <p className="bg-red-100 py-2 px-3 rounded-[0.56rem] text-red-800 text-[0.89em]">You cannot edit type of transaction after you submit</p>
+
               <div className="flex justify-end">
                 <button
                   disabled={loading}

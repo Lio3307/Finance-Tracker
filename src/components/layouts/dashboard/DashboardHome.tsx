@@ -16,14 +16,12 @@ const DashboardHome = () => {
         </div>
       </div>
 
-      {/* Cards */}
       <LatestTransaction/>
 
       <div className="flex my-[2rem]">
         <Modals />
       </div>
 
-      {/* Table */}
       <TableTransaction />
     </>
   );
