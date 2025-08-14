@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, auth } from "../../../config/firebase";
-import { addDoc, collection, updateDoc } from "firebase/firestore";
+import { addDoc, collection, updateDoc, serverTimestamp } from "firebase/firestore";
 
 const Modals = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,6 +34,7 @@ const Modals = () => {
         context,
         amount,
         type,
+        created: serverTimestamp(),
       });
       await updateDoc(transactionColl, {
         transactionId: transactionColl.id,

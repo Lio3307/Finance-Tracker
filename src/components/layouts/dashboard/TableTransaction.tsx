@@ -7,15 +7,8 @@ import {
   QueryDocumentSnapshot,
   type DocumentData,
 } from "firebase/firestore";
+import { type TransactionData } from "../../../type";
 
-type TransactionData = {
-  userId: string;
-  name: string;
-  context: string;
-  amount: number;
-  type: string;
-  transactionId: string;
-};
 
 const TableTransaction = () => {
   const [dataUser, setDataUSer] = useState<Array<TransactionData>>([]);
