@@ -1,5 +1,5 @@
 import LatestTransaction from "./LatestTransaction";
-import Modals from "./Modals";
+import ModalTransaction from "./ModalTransaction";
 import TableTransaction from "./TableTransaction";
 
 const DashboardHome = () => {
@@ -19,7 +19,7 @@ const DashboardHome = () => {
       <LatestTransaction/>
 
       <div className="flex my-[2rem]">
-        <Modals />
+        <ModalTransaction />
       </div>
 
       <TableTransaction />

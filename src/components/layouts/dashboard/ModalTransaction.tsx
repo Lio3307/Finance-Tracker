@@ -7,7 +7,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-const Modals = () => {
+const ModalTransaction = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [context, setContext] = useState<string>("");
@@ -187,4 +187,4 @@ const Modals = () => {
   );
 };
 
-export default Modals;
+export default ModalTransaction;
