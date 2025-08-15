@@ -103,8 +103,23 @@ const DetailTarget = () => {
                     style={{ width: `${ currentAmount > targetAmount ? '100': percentage}%` }}
                   ></div>
                 </div>
-                <p></p>
               </div>
+
+        <div className="my-[0.5rem] flex flex-wrap gap-4">
+            <button
+            onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+            }}
+             className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800">Update</button>
+            <button
+            onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+            }}
+             className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800">Delete</button>
+        </div>
+
             </div>
           </div>
         </div>
