@@ -13,7 +13,6 @@ const useDeleteTransaction = () => {
 
   const docRef = doc(db, "Users", idUser, "Transaction", dataId);
   await deleteDoc(docRef);
-  alert("Successfully deleted field!");
 };
 
   return useMutation({

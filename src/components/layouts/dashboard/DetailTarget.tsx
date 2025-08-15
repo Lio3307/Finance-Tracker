@@ -11,7 +11,7 @@ const DetailTarget = () => {
 
   const [getUserId, setGetUserId] = useState<string>("");
 
-  const deleteTarget = useDeleteTarget(getUserId);
+  const deleteTarget = useDeleteTarget();
 
   const [targetName, setTargetName] = useState<string>("");
   const [targetAmount, setTargetAmount] = useState<number>(0);
@@ -130,7 +130,7 @@ const DetailTarget = () => {
                       alert("Cannot delete selected data");
                       return;
                     }
-                    deleteTarget(targetId);
+                    deleteTarget.mutate({userId: getUserId, targetId});
                   }}
                   className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800"
                 >
