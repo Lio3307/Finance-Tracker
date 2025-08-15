@@ -6,6 +6,7 @@ import Auth from "./pages/Auth";
 import EditTransaction from "./components/layouts/dashboard/EditTransaction";
 import Target from "./components/layouts/dashboard/Target";
 import DetailTarget from "./components/layouts/dashboard/DetailTarget";
+import EditTarget from "./components/layouts/dashboard/EditTarget";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="target" element={<Target />} />
           <Route path="edit/:editId" element={<EditTransaction/>}/>
           <Route path="detail-target/:targetId" element={<DetailTarget/>}/>
+          <Route path="edit-target/:editTargetId" element={<EditTarget/>}/>
         </Route>
       </Routes>
     </>

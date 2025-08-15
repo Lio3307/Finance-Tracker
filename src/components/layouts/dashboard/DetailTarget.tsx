@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { TargetData } from "../../../type";
@@ -116,24 +116,21 @@ const DetailTarget = () => {
               </div>
 
               <div className="my-[0.5rem] flex flex-wrap gap-4">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
+                <Link
+                  to={`/dashboard/edit-target/${targetId}`}
                   className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800"
                 >
                   Update
-                </button>
+                </Link>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if(!targetId){
-                        alert("Cannot delete selected data")
-                        return;
+                    if (!targetId) {
+                      alert("Cannot delete selected data");
+                      return;
                     }
-                    deleteTarget(targetId)
+                    deleteTarget(targetId);
                   }}
                   className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800"
                 >

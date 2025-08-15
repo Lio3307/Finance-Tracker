@@ -1,0 +1,125 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { auth, db } from "../../../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+const EditTarget = () => {
+  const { editTargetId } = useParams();
+  const [newTargetName, setNewTargetName] = useState<string>("");
+  const [newTargetAmount, setNewTargetAmount] = useState<number>(1);
+  const [newCurrentAmount, setNewCurrentAmount] = useState<number>(1);
+
+  useEffect(() => {
+    const unsubs = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          if (!editTargetId) {
+            alert("Cannot find data with this id");
+            return;
+          }
+          const docRef = doc(db, "Users", user.uid, "Target", editTargetId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const dataDoc = docSnap.data();
+            setNewTargetName(dataDoc.targetName);
+            setNewTargetAmount(dataDoc.targetAmount);
+            setNewCurrentAmount(dataDoc.currentAmount);
+          }
+        } catch (err) {
+          throw new Error(`Cannot find edited data : ${err}`);
+        }
+      }
+    });
+
+    return () => {
+      unsubs();
+      setNewTargetName("");
+      setNewTargetAmount(1);
+      setNewCurrentAmount(1);
+    };
+  }, [editTargetId]);
+
+  return (
+    <>
+      <div className="flex justify-center p-6">
+  <div className="bg-gray-100 p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-200">
+    <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+      Target Things
+    </h2>
+
+    <div className="space-y-5">
+      <div>
+        <label
+          htmlFor="name"
+          className="block text-sm font-bold text-gray-700 mb-1"
+        >
+          Target Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          required
+          placeholder="Enter target name"
+          value={newTargetName}
+          onChange={(e) => setNewTargetName(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="targetAmount"
+          className="block text-sm font-bold text-gray-700 mb-1"
+        >
+          Target Amount
+        </label>
+        <input
+          id="targetAmount"
+          type="number"
+          required
+          placeholder="Enter target amount"
+          value={newTargetAmount}
+          onChange={(e) => setNewTargetAmount(Number(e.target.value))}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="currentAmount"
+          className="block text-sm font-bold text-gray-700 mb-1"
+        >
+          Current Amount
+        </label>
+        <input
+          id="currentAmount"
+          type="number"
+          required
+          placeholder="Enter current amount"
+          value={newCurrentAmount}
+          onChange={(e) => setNewCurrentAmount(Number(e.target.value))}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+      </div>
+
+      <div className="pt-2">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          className="w-full py-3 rounded-lg cursor-pointer bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition duration-200"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </>
+  );
+};
+
+export default EditTarget;
