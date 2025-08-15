@@ -4,9 +4,14 @@ import { useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { TargetData } from "../../../type";
+import useDeleteTarget from "../../../hooks/useDeleteTarget";
 
 const DetailTarget = () => {
   const { targetId } = useParams();
+
+  const [getUserId, setGetUserId] = useState<string>("");
+
+  const deleteTarget = useDeleteTarget(getUserId);
 
   const [targetName, setTargetName] = useState<string>("");
   const [targetAmount, setTargetAmount] = useState<number>(0);
@@ -19,6 +24,7 @@ const DetailTarget = () => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          setGetUserId(user.uid);
           if (!targetId) {
             alert("Cannot find data with this id!!");
             return;
@@ -100,26 +106,40 @@ const DetailTarget = () => {
                 <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
                   <div
                     className="bg-blue-500 h-3 rounded-full"
-                    style={{ width: `${ currentAmount > targetAmount ? '100': percentage}%` }}
+                    style={{
+                      width: `${
+                        currentAmount > targetAmount ? "100" : percentage
+                      }%`,
+                    }}
                   ></div>
                 </div>
               </div>
 
-        <div className="my-[0.5rem] flex flex-wrap gap-4">
-            <button
-            onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-            }}
-             className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800">Update</button>
-            <button
-            onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-            }}
-             className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800">Delete</button>
-        </div>
-
+              <div className="my-[0.5rem] flex flex-wrap gap-4">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if(!targetId){
+                        alert("Cannot delete selected data")
+                        return;
+                    }
+                    deleteTarget(targetId)
+                  }}
+                  className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
