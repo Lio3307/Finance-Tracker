@@ -53,13 +53,32 @@ const Target = () => {
         <div className="flex flex-wrap">
           <ModalTarget />
           <div>
-            {targetData.map((data, index) => (
-              <div key={index}>
-                <p>{data.targetName}</p>
-                <p>{data.targetAmount}</p>
-                <p>{data.currentAmount}</p>
-              </div>
-            ))}
+            {targetData.map((data, index) => {
+              const percentage = (data.currentAmount / data.targetAmount) * 100;
+
+              return (
+                <div
+                  key={index}
+                  className="mb-4 p-4 border rounded-lg bg-white shadow"
+                >
+                  <p className="font-semibold">{data.targetName}</p>
+                  <p className="text-sm text-gray-600">
+                    {data.currentAmount} / {data.targetAmount}
+                  </p>
+
+                  <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+                    <div
+                      className="bg-blue-500 h-3 rounded-full"
+                      style={{ width: `${percentage}%` }}
+                    ></div>
+                  </div>
+
+                  <p className="text-sm text-gray-500 mt-1">
+                    {percentage.toFixed(1)}%
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
