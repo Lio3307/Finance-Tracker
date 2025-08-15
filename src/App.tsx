@@ -5,6 +5,7 @@ import DashboardHome from "./components/layouts/dashboard/DashboardHome";
 import Auth from "./pages/Auth";
 import EditTransaction from "./components/layouts/dashboard/EditTransaction";
 import Target from "./components/layouts/dashboard/Target";
+import DetailTarget from "./components/layouts/dashboard/DetailTarget";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="home" element={<DashboardHome />} />
           <Route path="target" element={<Target />} />
           <Route path="edit/:editId" element={<EditTransaction/>}/>
+          <Route path="detail-target/:targetId" element={<DetailTarget/>}/>
         </Route>
       </Routes>
     </>

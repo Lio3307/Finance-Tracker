@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const Target = () => {
   const [targetData, setTargetData] = useState<TargetData[]>([]);
@@ -54,9 +55,10 @@ const Target = () => {
               const percentage = (data.currentAmount / data.targetAmount) * 100;
 
               return (
-                <div
+                <Link
+                to={`/dashboard/detail-target/${data.targetId}`}
                   key={index}
-                  className="w-full sm:w-[15rem] h-[10rem] p-4 rounded-lg bg-white shadow-lg flex flex-col justify-between"
+                  className="w-full sm:w-[15rem] h-[10rem] p-4 rounded-lg bg-white shadow-lg flex flex-col justify-between cursor-pointer hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <div>
                     <p className="font-semibold text-lg mb-2">
@@ -71,14 +73,14 @@ const Target = () => {
                     <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
                       <div
                         className="bg-blue-500 h-3 rounded-full"
-                        style={{ width: `${percentage}%` }}
+                        style={{ width: ` ${data.currentAmount > data.targetAmount ? `100`: percentage}%` }}
                       ></div>
                     </div>
                     <p className="text-sm text-gray-500 mt-1">
                       {percentage.toFixed(1)}%
                     </p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

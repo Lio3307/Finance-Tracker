@@ -14,4 +14,5 @@ export type TargetData = {
   targetName:string
   targetAmount:number
   currentAmount:number
+  targetId?: string
 }
