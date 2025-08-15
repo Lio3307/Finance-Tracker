@@ -33,49 +33,51 @@ const Target = () => {
 
   return (
     <>
-      <p className="font-bold text-[2rem] mt-[3rem] md:mt-0">Target</p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id facere
-        necessitatibus voluptates repellat similique voluptatem perferendis ex
-        repudiandae eos architecto quis aliquid eveniet, vel commodi, laboriosam
-        dolores. Molestias, iste quam?
+      <p className="font-bold text-3xl mt-12 md:mt-0">Target</p>
+      <p className="text-gray-600 mt-2">
+        Set your savings goals and track your progress to achieve the things you
+        want or have planned.
       </p>
 
       <div className="w-full h-1 bg-indigo-500 rounded-full my-7"></div>
 
       {loading ? (
-        <div className="py-12">
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
-          </div>
+        <div className="py-12 flex justify-center items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
         </div>
       ) : (
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4 w-full">
           <ModalTarget />
-          <div>
+
+          <div className="flex flex-wrap gap-4">
             {targetData.map((data, index) => {
               const percentage = (data.currentAmount / data.targetAmount) * 100;
 
               return (
                 <div
                   key={index}
-                  className="mb-4 p-4 border rounded-lg bg-white shadow"
+                  className="w-full sm:w-[15rem] h-[10rem] p-4 rounded-lg bg-white shadow-lg flex flex-col justify-between"
                 >
-                  <p className="font-semibold">{data.targetName}</p>
-                  <p className="text-sm text-gray-600">
-                    {data.currentAmount} / {data.targetAmount}
-                  </p>
-
-                  <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
-                    <div
-                      className="bg-blue-500 h-3 rounded-full"
-                      style={{ width: `${percentage}%` }}
-                    ></div>
+                  <div>
+                    <p className="font-semibold text-lg mb-2">
+                      {data.targetName}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {data.currentAmount} / {data.targetAmount}
+                    </p>
                   </div>
 
-                  <p className="text-sm text-gray-500 mt-1">
-                    {percentage.toFixed(1)}%
-                  </p>
+                  <div>
+                    <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+                      <div
+                        className="bg-blue-500 h-3 rounded-full"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {percentage.toFixed(1)}%
+                    </p>
+                  </div>
                 </div>
               );
             })}
