@@ -1,76 +1,68 @@
-import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { useState } from "react";
-import { auth, db } from "../../../config/firebase";
+import { auth} from "../../../config/firebase";
+import useAddTarget from "../../../hooks/useAddTarget";
 
 const ModalTarget = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [targetName, setTargetName] = useState<string>("");
+  const [targetAmount, setTargetAmount] = useState<number>(1);
+  const [currentAmount, setCurrentAmount] = useState<number>(1);
 
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [targetName, setTargetName] = useState<string>("")
-    const [targetAmount, setTargetAmount] = useState<number >(1)
-    const [currentAmount, setCurrentAmount] = useState<number >(1)
+  const mutation = useAddTarget();
 
-    const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const handleTarget = async () => {
-        if(!targetName.trim() || !targetAmount || !currentAmount){
-            alert("You must input corrent value in  every input field!!")
-            return
-        }
-
-        try {
-            setLoading(true)
-            if(!auth.currentUser){
-                alert("user not registered!!")
-                return;
-            }
-            const collRef = collection(db, "Users", auth.currentUser?.uid, "Target")
-            const newColl = await addDoc(collRef, {
-                userId: auth.currentUser.uid,
-                targetName,
-                targetAmount,
-                currentAmount,
-            })
-            await updateDoc(newColl, {
-                targetId: newColl.id,
-            })
-            alert("Successfully added new target!!")
-            setLoading(false)
-            setIsOpen(false)
-        } catch (err) {
-            setLoading(false)
-            throw new Error(`Cannot create target : ${err}`);
-            
-        }
+  const handleTarget = async () => {
+    if (!targetName.trim() || !targetAmount || !currentAmount) {
+      alert("You must input corrent value in  every input field!!");
+      return;
     }
+
+    try {
+      if (!auth.currentUser) {
+        alert("User not registered");
+        return;
+      }
+      setLoading(true);
+      mutation.mutate({
+        userId: auth.currentUser.uid,
+        targetName,
+        targetAmount,
+        currentAmount,
+      });
+      alert("Successfully added new target!!");
+      setLoading(false);
+      setIsOpen(false);
+    } catch (err) {
+      setLoading(false);
+      throw new Error(`Cannot create target : ${err}`);
+    }
+  };
 
   return (
     <>
       <button
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setIsOpen(true)
-      }}
-       className=" text-[1.6rem] border-2 hover:text-white hover:bg-indigo-600 cursor-pointer border-indigo-800 text-black font-bold py-[4rem] px-[4.3rem] rounded-[1.2rem]">
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(true);
+        }}
+        className=" text-[1.6rem] border-2 hover:text-white hover:bg-indigo-600 cursor-pointer border-indigo-800 text-black font-bold py-[4rem] px-[4.3rem] rounded-[1.2rem]"
+      >
         +
       </button>
 
       {isOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50 px-4"
-          
-        >
-          <div
-            className="bg-gray-100 rounded-xl shadow-xl p-6 w-[90%] sm:w-full sm:max-w-md relative"
-          >
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50 px-4">
+          <div className="bg-gray-100 rounded-xl shadow-xl p-6 w-[90%] sm:w-full sm:max-w-md relative">
             <button
               className="absolute top-3 right-3 hover:cursor-pointer text-indigo-700 text-[1.8rem] font-bold hover:text-indigo-800 transition"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                setTargetName("")
-                setTargetAmount(1)
-                setCurrentAmount(1)
+                setTargetName("");
+                setTargetAmount(1);
+                setCurrentAmount(1);
                 setIsOpen(false);
               }}
             >
@@ -109,7 +101,7 @@ const ModalTarget = () => {
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <label className="block text-sm font-bold text-gray-700">
-                Current 
+                Current
               </label>
               <input
                 required
@@ -140,7 +132,6 @@ const ModalTarget = () => {
                   Submit
                 </button>
               </div>
-
             </div>
           </div>
         </div>

@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { db, auth } from "../../../config/firebase";
-import {
-  addDoc,
-  collection,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { auth } from "../../../config/firebase";
+
+import useAddTransaction from "../../../hooks/useAddTransaction";
+import { serverTimestamp } from "firebase/firestore";
 
 const ModalTransaction = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,7 +12,9 @@ const ModalTransaction = () => {
   const [type, setType] = useState<string>("Income");
   const [loading, setLoading] = useState<boolean>(false);
 
-  
+  const mutation = useAddTransaction();
+
+
   const handleTransaction = async () => {
     if (!name.trim() || !context.trim() || !amount) {
       alert("input field cannot empty!!");
@@ -24,27 +23,20 @@ const ModalTransaction = () => {
 
     try {
       setLoading(true);
-      if (!auth.currentUser) {
-        setLoading(false);
-        throw new Error("User not registered");
-      }
-      const collRef = collection(
-        db,
-        "Users",
-        auth.currentUser?.uid,
-        "Transaction"
-      );
-      const transactionColl = await addDoc(collRef, {
-        userId: auth.currentUser.uid,
+        if (!auth.currentUser) {
+    alert("User not registered!");
+    return;
+  }
+      mutation.mutate({
+        userId: auth.currentUser?.uid,
         name,
         context,
         amount,
         type,
         created: serverTimestamp(),
-      });
-      await updateDoc(transactionColl, {
-        transactionId: transactionColl.id,
-      });
+
+      })
+      
       alert("Successfully add transaction!");
       setIsOpen(false);
       setLoading(false);
