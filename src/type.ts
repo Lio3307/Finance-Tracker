@@ -7,3 +7,11 @@ export type TransactionData = {
   transactionId: string;
   created: string;
 };
+
+
+export type TargetData = {
+  userId:string
+  targetName:string
+  targetAmount:number
+  currentAmount:number
+}

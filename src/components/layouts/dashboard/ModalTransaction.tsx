@@ -15,6 +15,7 @@ const ModalTransaction = () => {
   const [type, setType] = useState<string>("Income");
   const [loading, setLoading] = useState<boolean>(false);
 
+  
   const handleTransaction = async () => {
     if (!name.trim() || !context.trim() || !amount) {
       alert("input field cannot empty!!");
