@@ -1,22 +1,28 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+const useDeleteTransaction = () => {
+  const queryClient = useQueryClient();
 
 
 
-const useDeleteTransaction = (uid: string) => {
+  const deleteTransaction = async ({ idUser, dataId }: { idUser: string; dataId: string }) => {
+  const confirmDelete = confirm("Are you sure want to delete this field?");
+  if (!confirmDelete) return;
 
-    return async function( dataId: string) {
-    const confirmDelete = confirm("Are you sure want to delete this field?")
-    if(!confirmDelete) return;
-    try {
-        const docRef = doc(db, "Users", uid, "Transaction", dataId)
-        await deleteDoc(docRef)
-        alert("Successfuly delete field!")
-    } catch (err) {
-        throw new Error(`Cannot delete data : ${err}`);
-        
+  const docRef = doc(db, "Users", idUser, "Transaction", dataId);
+  await deleteDoc(docRef);
+  alert("Successfully deleted field!");
+};
+
+  return useMutation({
+    mutationFn: deleteTransaction,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transaction"] });
+      alert("Successfully deleted field!");
     }
-}
-}
+  });
+};
 
 export default useDeleteTransaction;
