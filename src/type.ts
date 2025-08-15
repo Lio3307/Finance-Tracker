@@ -7,6 +7,7 @@ export type TransactionData = {
   amount: number;
   type: string;
   created: string | FieldValue;
+  transactionId?: string
 };
 
 

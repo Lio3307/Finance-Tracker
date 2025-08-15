@@ -34,7 +34,6 @@ const ModalTransaction = () => {
         amount,
         type,
         created: serverTimestamp(),
-
       })
       
       alert("Successfully add transaction!");

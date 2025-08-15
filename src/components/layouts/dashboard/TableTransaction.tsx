@@ -1,48 +1,32 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../../config/firebase";
-import {
-  collection,
-  getDocs,
-  QueryDocumentSnapshot,
-  type DocumentData,
-} from "firebase/firestore";
-import { type TransactionData } from "../../../type";
+import { auth } from "../../../config/firebase";
+
 import { Link } from "react-router-dom";
 import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
+import useFetchTransactions from "../../../hooks/useFetchTransactions";
 
 const TableTransaction = () => {
-  const [dataUser, setDataUSer] = useState<Array<TransactionData>>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [idUser, setIdUser] = useState<string>("")
-  const deleteTransaction = useDeleteTransaction(idUser)
-
+  const [idUser, setIdUser] = useState<string | null>(null);
   useEffect(() => {
-    const unsubs = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          setIdUser(user.uid)
-          setLoading(true);
-          const collRef = collection(db, "Users", user.uid, "Transaction");
-          const collSnap = await getDocs(collRef);
-          if (collSnap) {
-            const dataDocs: TransactionData[] = collSnap.docs.map(
-              (doc: QueryDocumentSnapshot<DocumentData>) => ({
-                ...(doc.data() as TransactionData),
-              })
-            );
-            setDataUSer(dataDocs);
-          }
-          setLoading(false);
-        } catch (err) {
-          setLoading(false);
-          throw new Error(`Cannot fatching data : ${err}`);
-        }
-      }
+    const unsubs = onAuthStateChanged(auth, (user) => {
+      setIdUser(user ? user.uid : null);
     });
 
     return () => unsubs();
   }, []);
+  const { data, isLoading, isError, error } = useFetchTransactions(idUser!);
+  const deleteTransaction = useDeleteTransaction(idUser!);
+
+  const dataUser = Array.isArray(data) ? data : [];
+
+  if (isError) {
+    throw new Error(`Something wrong : ${error.message}`);
+  }
+
+  if (!idUser) {
+    return;
+  }
 
   return (
     <div className="overflow-x-auto mt-6 rounded-xl shadow-lg">
@@ -67,7 +51,7 @@ const TableTransaction = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {loading ? (
+          {isLoading ? (
             <tr>
               <td colSpan={5} className="py-12">
                 <div className="flex justify-center items-center">
@@ -132,12 +116,15 @@ const TableTransaction = () => {
                       </svg>
                     </Link>
                     <button
-
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      deleteTransaction(data.transactionId)
-                    }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!data.transactionId) {
+                          alert("Cannot find data with this id");
+                          return;
+                        }
+                        deleteTransaction(data.transactionId);
+                      }}
                       className="p-2 font-medium text-white cursor-pointer bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 ease-in-out shadow-sm"
                       aria-label="Delete"
                     >
