@@ -1,15 +1,13 @@
-import { addDoc, collection, updateDoc } from "firebase/firestore";
+import { addDoc, collection, query,  where, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import type { Funds } from "../type";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const addFunds = async ({userId, targetId, newFunds}: {userId: string, targetId: string, newFunds: Funds}) => {
 
         const collRef = collection(db, "Users", userId, "Target", targetId, "Funds")
-        const newColl = await addDoc(collRef, newFunds)
-        await updateDoc(newColl, {
-            fundsId: newColl.id
-        })
+        await addDoc(collRef, newFunds)
+
 
 
     return {...newFunds}
@@ -28,5 +26,30 @@ const useAddFunds = () => {
     })
 }
 
+const getFunds = async ({userId, targetId}: {userId: string, targetId: string}) => {
+    try {
+        const collRef = collection(db, "Users", userId, "Target", targetId, "Funds")
+        const q = query(collRef, where("targetId", "==", targetId))
+        const docSnap = await getDocs(q)
+        if(!docSnap.empty){
+            return docSnap.docs.map((doc) => ({
+                fundId: doc.id,
+                ...doc.data()
+            }))
+        }
+    } catch (err) {
+        throw new Error(`Cannot get data : ${err}`);
+        
+    }
+    return []
+}
 
-export {useAddFunds};
+const useFetchFunds = (userId:string, targetId:string) => {
+    return useQuery({
+        queryKey: ["funds"],
+        queryFn:() => getFunds({userId, targetId}),
+        enabled: !!userId && !!targetId,
+    })
+}
+
+export {useAddFunds, useFetchFunds};

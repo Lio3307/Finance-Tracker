@@ -21,5 +21,6 @@ export type TargetData = {
 
 export type Funds = {
   fundsAmount: number
+  targetId: string
   fundsId?:string
 }
