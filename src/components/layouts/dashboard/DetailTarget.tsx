@@ -1,11 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { auth, db } from "../../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import type { TargetData } from "../../../type";
+import { auth } from "../../../config/firebase";
 import useDeleteTarget from "../../../hooks/useDeleteTarget";
 import { useAddFunds, useFetchFunds } from "../../../hooks/useFunds";
+import useTargetDetail from "../../../hooks/useTargetDetail";
 
 const DetailTarget = () => {
   const { targetId } = useParams();
@@ -15,6 +14,7 @@ const DetailTarget = () => {
   const [getUserId, setGetUserId] = useState<string>("");
 
   const { data, isError, error } = useFetchFunds(getUserId, targetId!);
+  const {data: targetDetailData, isLoading,isError: targetError, error: targetMassageError} = useTargetDetail(getUserId, targetId!)
 
   const fundData = Array.isArray(data) ? data : [];
   const deleteTarget = useDeleteTarget();
@@ -22,48 +22,32 @@ const DetailTarget = () => {
   const [isAddedfunds, setIsAddedFunds] = useState<boolean>(false);
   const [fundsAmount, setFundsAmount] = useState<number>(1);
 
-  const [targetName, setTargetName] = useState<string>("");
-  const [targetAmount, setTargetAmount] = useState<number>(0);
-  const [currentAmount, setCurrentAmount] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const targetName = targetDetailData?.targetAmount 
+  const targetAmount = targetDetailData?.targetAmount ?? 0
+  const currentAmount = targetDetailData?.currentAmount ?? 0
 
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        try {
           setGetUserId(user.uid);
-          if (!targetId) {
-            alert("Cannot find data with this id!!");
-            return;
-          }
-          const docRef = doc(db, "Users", user.uid, "Target", targetId);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            const docData = docSnap.data() as TargetData;
-
-            setTargetName(docData.targetName);
-            setTargetAmount(docData.targetAmount);
-            setCurrentAmount(docData.currentAmount);
-          }
-          setLoading(false);
-        } catch (err) {
-          setLoading(false);
-          throw new Error(`Cannot get detail data : ${err}`);
-        }
       }
     });
 
     return () => unsubs();
-  }, [targetId, ]);
+  }, [targetId, targetDetailData]);
 
   const percentage = (currentAmount / targetAmount) * 100;
+
+  if(targetError){
+    return <p>{`Cannot get data : ${targetMassageError.message}`}</p>
+  }
 
   if (isError) {
     return <p>{`Cannot fetch Data: ${error.message}`}</p>;
   }
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <div className="py-12 flex justify-center items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
         </div>
@@ -130,12 +114,10 @@ const DetailTarget = () => {
               </>
             ) : (
               fundData.map((data) => (
-                <>
                   <div key={data.fundId}>
                     <p>{data.fundsAmount}</p>
                     <p>{data.date}</p>
                   </div>
-                </>
               ))
             )}
 

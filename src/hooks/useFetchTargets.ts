@@ -21,7 +21,7 @@ const getTargets = async (uid: string) => {
 
 const useFetchTargets = (uid: string) => {
   return useQuery({
-    queryKey: ["targets"],
+    queryKey: ["targets", uid],
     queryFn: () => getTargets(uid),
     enabled: !!uid,
     staleTime: 1000 * 60 * 5,
