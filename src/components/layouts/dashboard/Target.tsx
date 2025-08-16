@@ -10,7 +10,7 @@ const Target = () => {
 
   const [getUid, setGetUid] = useState<string | null>(null)
 
-  const { data, isLoading, isError, error } = useFetchTargets(getUid!);
+  const { data, isLoading , isError, error} = useFetchTargets(getUid!);
 
   const targetData = Array.isArray(data) ? data : [];
 
@@ -22,7 +22,8 @@ const Target = () => {
     return () => unsubs()
   }, [])
 
-  if (isError) return <p>{`Error : ${error.message}`}</p>;
+  if(isError) throw new Error(`Error : ${error.message}`);
+  
 
   return (
     <>
@@ -43,7 +44,9 @@ const Target = () => {
           <ModalTarget />
 
           <div className="flex flex-wrap gap-4">
-            {targetData.map((datas: TargetData) => {
+            {targetData.length === 0 ?(<p className="mt-[3rem]">
+              You dont have any target, create one now
+            </p>) : targetData.map((datas: TargetData) => {
               const percentage =
                 (datas.currentAmount / datas.targetAmount) * 100;
 

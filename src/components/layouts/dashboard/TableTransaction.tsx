@@ -123,7 +123,7 @@ const TableTransaction = () => {
                           alert("Cannot find data with this id");
                           return;
                         }
-                        mutation.mutate({idUser, dataId: data.transactionId});
+                        mutation.mutate({idUser: idUser, dataId: data.transactionId});
                       }}
                       className="p-2 font-medium text-white cursor-pointer bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 ease-in-out shadow-sm"
                       aria-label="Delete"

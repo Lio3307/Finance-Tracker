@@ -9,9 +9,9 @@ const addTransaction = async (newTransaction: TransactionData) => {
     return;
   }
   const collRef = collection(db, "Users", auth.currentUser?.uid, "Transaction");
-   await addDoc(collRef, newTransaction);
+   const newDoc = await addDoc(collRef, newTransaction);
 
-  return {  ...newTransaction };
+  return { transactionId: newDoc, ...newTransaction };
 };
 
 const useAddTransaction = () => {

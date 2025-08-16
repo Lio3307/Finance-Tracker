@@ -16,13 +16,14 @@ const getTargets = async (uid: string) => {
       ...(doc.data() as TargetData),
     }));
   }
+  return [];
 };
 
 const useFetchTargets = (uid: string) => {
   return useQuery({
     queryKey: ["targets"],
     queryFn: () => getTargets(uid),
-    enabled: !!auth.currentUser,
+    enabled: !!uid,
     staleTime: 1000 * 60 * 5,
   });
 };
