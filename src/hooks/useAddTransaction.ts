@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 import type { TransactionData } from "../type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -9,9 +9,12 @@ const addTransaction = async (newTransaction: TransactionData) => {
     return;
   }
   const collRef = collection(db, "Users", auth.currentUser?.uid, "Transaction");
-   const newDoc = await addDoc(collRef, newTransaction);
+  const newDoc = await addDoc(collRef, newTransaction);
+  await updateDoc(newDoc, {
+    transactionId: newDoc.id,
+  });
 
-  return { transactionId: newDoc, ...newTransaction };
+  return { ...newTransaction };
 };
 
 const useAddTransaction = () => {

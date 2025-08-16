@@ -18,8 +18,7 @@ const DetailTarget = () => {
   const [currentAmount, setCurrentAmount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const percentage = (currentAmount / targetAmount) * 100;
-
+  
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -48,6 +47,8 @@ const DetailTarget = () => {
 
     return () => unsubs();
   }, [targetId]);
+  
+  const percentage = (currentAmount / targetAmount) * 100;
 
   return (
     <>
@@ -65,7 +66,6 @@ const DetailTarget = () => {
             <div className="space-y-5">
               <div>
                 <label
-                  htmlFor="name"
                   className="block text-sm font-bold text-gray-700 mb-1"
                 >
                   Target Name
@@ -75,7 +75,6 @@ const DetailTarget = () => {
 
               <div>
                 <label
-                  htmlFor="context"
                   className="block text-sm font-bold text-gray-700 mb-1"
                 >
                   Target Amount
@@ -85,7 +84,6 @@ const DetailTarget = () => {
 
               <div>
                 <label
-                  htmlFor="amount"
                   className="block text-sm font-bold text-gray-700 mb-1"
                 >
                   Current Amount
@@ -95,7 +93,6 @@ const DetailTarget = () => {
 
               <div>
                 <label
-                  htmlFor="amount"
                   className="block text-sm font-bold text-gray-700 mb-1"
                 >
                   Progress
