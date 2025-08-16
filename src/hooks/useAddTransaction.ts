@@ -23,6 +23,7 @@ const useAddTransaction = () => {
     mutationFn: addTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transaction"] });
+      queryClient.invalidateQueries({ queryKey: ["latest"] });
     },
   });
 };

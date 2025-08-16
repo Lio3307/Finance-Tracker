@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { type TransactionData } from "../../../type";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../../config/firebase";
-import { collection, getDocs, orderBy, limit, query } from "firebase/firestore";
+import { auth, } from "../../../config/firebase";
+import useLatestTransaction from "../../../hooks/useLatestTransaction";
 
 const LatestTransaction = () => {
-  const [transactionData, setTransactionData] =
-    useState<TransactionData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [getUserId, setGetUserId] = useState<string>("")
+
+  const {data, isLoading, isError, error} = useLatestTransaction(getUserId)
+
+  const transactionData = data;
 
   const setDate = new Date();
   const currentDate = `${setDate.getDate()}/${
@@ -17,31 +18,19 @@ const LatestTransaction = () => {
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        try {
-          const collRef = collection(db, "Users", user.uid, "Transaction");
-          const q = query(collRef, orderBy("created", "desc"), limit(1));
-          const dataSnap = await getDocs(q);
-          if (!dataSnap.empty) {
-            const doc = dataSnap.docs[0];
-            const lastDoc = {
-              ...(doc.data() as TransactionData),
-            };
-            setTransactionData(lastDoc);
-          }
-          setLoading(false);
-        } catch (err) {
-          setLoading(false);
-          throw new Error(`Cannot Fetch Data : ${err}`);
-        }
+       setGetUserId(user.uid)
       }
     });
-
     return () => unsubs();
   }, []);
 
+  if(isError){
+    return <p>{`Cannot show latest data : ${error}`}</p>
+  }
+
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <>
           <div className="py-12">
             <div className="flex justify-center items-center">

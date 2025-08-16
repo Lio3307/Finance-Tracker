@@ -28,6 +28,7 @@ const useDeleteTransaction = () => {
     mutationFn: deleteTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transaction"] });
+      queryClient.invalidateQueries({ queryKey: ["latest"] });
     },
   });
 };
