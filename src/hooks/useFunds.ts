@@ -59,7 +59,7 @@ const getFunds = async ({userId, targetId}: {userId: string, targetId: string}) 
 
 const useFetchFunds = (userId:string, targetId:string) => {
     return useQuery({
-        queryKey: ["funds"],
+        queryKey: ["funds", targetId],
         queryFn:() => getFunds({userId, targetId}),
         enabled: !!userId && !!targetId,
         staleTime: 1000 * 60 * 5,

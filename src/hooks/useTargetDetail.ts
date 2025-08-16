@@ -13,7 +13,7 @@ const getTargetDetail = async({userId, targetId} : {userId:string, targetId:stri
 
 const useTargetDetail = (userId:string, targetId:string) => {
     return useQuery({
-        queryKey: ["targets"],
+        queryKey: ["targets", targetId],
         queryFn: () => getTargetDetail({userId, targetId}),
         enabled: !!userId && !!targetId,
         staleTime: 1000 * 60 * 5,
