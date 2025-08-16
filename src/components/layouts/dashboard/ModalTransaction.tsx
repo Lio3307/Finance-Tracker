@@ -14,7 +14,6 @@ const ModalTransaction = () => {
 
   const mutation = useAddTransaction();
 
-
   const handleTransaction = async () => {
     if (!name.trim() || !context.trim() || !amount) {
       alert("input field cannot empty!!");
@@ -23,10 +22,10 @@ const ModalTransaction = () => {
 
     try {
       setLoading(true);
-        if (!auth.currentUser) {
-    alert("User not registered!");
-    return;
-  }
+      if (!auth.currentUser) {
+        alert("User not registered!");
+        return;
+      }
       mutation.mutate({
         userId: auth.currentUser?.uid,
         name,
@@ -34,8 +33,8 @@ const ModalTransaction = () => {
         amount,
         type,
         created: serverTimestamp(),
-      })
-      
+      });
+
       alert("Successfully add transaction!");
       setIsOpen(false);
       setLoading(false);
@@ -89,66 +88,72 @@ const ModalTransaction = () => {
 
             <h1 className="text-lg font-bold mb-4">New Transaction</h1>
 
-            <div className="space-y-3">
-              <label className="block text-sm font-bold text-gray-700">
+            <form className="space-y-3">
+              <label
+                htmlFor="name"
+                className="block text-sm font-bold text-gray-700"
+              >
                 Name
               </label>
               <input
                 required
+                id="name"
+                name="name"
+                autoComplete="name"
                 value={name}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  setName(e.target.value);
-                }}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <label className="block text-sm font-bold text-gray-700">
+
+              <label
+                htmlFor="context"
+                className="block text-sm font-bold text-gray-700"
+              >
                 Context
               </label>
               <input
                 required
+                id="context"
+                name="context"
+                autoComplete="off"
                 value={context}
-                onChange={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setContext(e.target.value);
-                }}
+                onChange={(e) => setContext(e.target.value)}
                 type="text"
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <label className="block text-sm font-bold text-gray-700">
+
+              <label
+                htmlFor="amount"
+                className="block text-sm font-bold text-gray-700"
+              >
                 Amount
               </label>
               <input
                 required
+                id="amount"
+                name="amount"
+                autoComplete="off"
                 value={amount}
-                onChange={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setAmount(Number(e.target.value));
-                }}
+                onChange={(e) => setAmount(Number(e.target.value))}
                 type="number"
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <label className="my-2 font-bold">
+
+              <label htmlFor="type" className="my-2 font-bold">
                 Type <span className="font-bold ml-[0.5rem]">:</span>
               </label>
               <select
                 required
+                id="type"
+                name="type"
                 value={type}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  setType(e.target.value);
-                }}
+                onChange={(e) => setType(e.target.value)}
                 className="my-[1rem] ml-[1rem] cursor-pointer bg-indigo-600 text-white font-bold py-[0.3rem] px-[0.7rem] rounded-[0.4rem]"
               >
                 <option value="Income">Income</option>
                 <option value="Expenses">Expenses</option>
               </select>
-              <br />
 
               <p className="bg-red-100 py-2 px-3 rounded-[0.56rem] text-red-800 text-[0.89em]">
                 You cannot edit type of transaction after you submit
@@ -161,9 +166,8 @@ const ModalTransaction = () => {
                     loading
                       ? "cursor-not-allowed"
                       : "hover:bg-indigo-300 cursor-pointer"
-                  } flex-1 sm:flex-none `}
+                  } flex-1 sm:flex-none`}
                   onClick={(e) => {
-                    e.stopPropagation();
                     e.preventDefault();
                     handleTransaction();
                   }}
@@ -171,7 +175,7 @@ const ModalTransaction = () => {
                   Submit
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       )}
