@@ -3,10 +3,18 @@ import { db } from "../config/firebase";
 import type { Funds } from "../type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+  const setDate = new Date();
+  const currentDate = `${setDate.getDate()}/${
+    setDate.getMonth() + 1
+  }/${setDate.getFullYear()}`;
+
+
 const addFunds = async ({userId, targetId, newFunds}: {userId: string, targetId: string, newFunds: Funds}) => {
 
         const collRef = collection(db, "Users", userId, "Target", targetId, "Funds")
-        await addDoc(collRef, {...newFunds})
+        await addDoc(collRef, {...newFunds,
+            date: currentDate,
+        })
 
         const targetDocRef = doc(db, "Users", userId, "Target", targetId)
         await updateDoc(targetDocRef, {
@@ -26,6 +34,7 @@ const useAddFunds = () => {
         mutationFn: addFunds,
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ["funds"]})
+            queryClient.invalidateQueries({queryKey: ["targets"]})
         }
     })
 }
@@ -38,7 +47,7 @@ const getFunds = async ({userId, targetId}: {userId: string, targetId: string}) 
         if(!docSnap.empty){
             return docSnap.docs.map((doc) => ({
                 fundId: doc.id,
-                ...doc.data()
+                ...(doc.data() as Funds),
             }))
         }
     } catch (err) {
@@ -53,6 +62,7 @@ const useFetchFunds = (userId:string, targetId:string) => {
         queryKey: ["funds"],
         queryFn:() => getFunds({userId, targetId}),
         enabled: !!userId && !!targetId,
+        staleTime: 1000 * 60 * 5,
     })
 }
 
