@@ -8,13 +8,11 @@ const EditTarget = () => {
   const { editTargetId } = useParams();
   const [newTargetName, setNewTargetName] = useState<string>("");
   const [newTargetAmount, setNewTargetAmount] = useState<number>(1);
-  const [newCurrentAmount, setNewCurrentAmount] = useState<number>(1);
-
   const [loading, setLoading] = useState<boolean>(true);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
   const handleEditTarget = async () => {
-    if (!newTargetName.trim() || !newTargetAmount || !newCurrentAmount) {
+    if (!newTargetName.trim() || !newTargetAmount) {
       alert("Input field must be fill corectly!");
       return;
     }
@@ -39,7 +37,6 @@ const EditTarget = () => {
       await updateDoc(docRef, {
         targetName: newTargetName,
         targetAmount: newTargetAmount,
-        currentAmount: newCurrentAmount,
       });
       alert("Successfully updating data");
       setIsUpdate(false);
@@ -63,7 +60,6 @@ const EditTarget = () => {
             const dataDoc = docSnap.data();
             setNewTargetName(dataDoc.targetName);
             setNewTargetAmount(dataDoc.targetAmount);
-            setNewCurrentAmount(dataDoc.currentAmount);
           }
           setLoading(false);
         } catch (err) {
@@ -77,7 +73,6 @@ const EditTarget = () => {
       unsubs();
       setNewTargetName("");
       setNewTargetAmount(1);
-      setNewCurrentAmount(1);
     };
   }, [editTargetId]);
 
@@ -127,24 +122,6 @@ const EditTarget = () => {
                   placeholder="Enter target amount"
                   value={newTargetAmount}
                   onChange={(e) => setNewTargetAmount(Number(e.target.value))}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="currentAmount"
-                  className="block text-sm font-bold text-gray-700 mb-1"
-                >
-                  Current Amount
-                </label>
-                <input
-                  id="currentAmount"
-                  type="number"
-                  required
-                  placeholder="Enter current amount"
-                  value={newCurrentAmount}
-                  onChange={(e) => setNewCurrentAmount(Number(e.target.value))}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 />
               </div>
