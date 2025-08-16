@@ -14,7 +14,7 @@ const DetailTarget = () => {
   const deleteTarget = useDeleteTarget();
 
   const [isAddedfunds, setIsAddedFunds] = useState<boolean>(false);
-  const [fundsAmount, setFundsAmount] = useState<number>(1)
+  const [fundsAmount, setFundsAmount] = useState<number>(1);
 
   const [targetName, setTargetName] = useState<string>("");
   const [targetAmount, setTargetAmount] = useState<number>(0);
@@ -59,97 +59,110 @@ const DetailTarget = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
         </div>
       ) : (
-        <div className="flex justify-center p-6">
-          <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md my-auto border border-gray-200">
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-              Target Things
-            </h2>
+<div className="min-h-screen bg-gray-50 p-8">
+  <h2 className="text-3xl font-bold mb-10 text-gray-800 text-center">
+    Target Things
+  </h2>
 
-            <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
-                  Target Name
-                </label>
-                <p>{targetName}</p>
-              </div>
+  <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-md border space-y-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label className="block text-sm font-semibold text-gray-600 mb-1">
+          Target Name
+        </label>
+        <p className="text-lg font-medium text-gray-800">{targetName}</p>
+      </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
-                  Target Amount
-                </label>
-                <p>{targetAmount}</p>
-              </div>
+      <div>
+        <label className="block text-sm font-semibold text-gray-600 mb-1">
+          Target Amount
+        </label>
+        <p className="text-lg font-medium text-gray-800">{targetAmount}</p>
+      </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
-                  Current Amount
-                </label>
-                <p>{currentAmount}</p>
-              </div>
+      <div>
+        <label className="block text-sm font-semibold text-gray-600 mb-1">
+          Current Amount
+        </label>
+        <p className="text-lg font-medium text-gray-800">{currentAmount}</p>
+      </div>
+    </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
-                  Progress
-                </label>
-                <p className="text-sm text-gray-500 mt-1">
-                  {percentage.toFixed(1)}%
-                </p>
-                <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
-                  <div
-                    className="bg-blue-500 h-3 rounded-full"
-                    style={{
-                      width: `${
-                        currentAmount > targetAmount ? "100" : percentage
-                      }%`,
-                    }}
-                  ></div>
-                </div>
-              </div>
+    <div>
+      <label className="block text-sm font-semibold text-gray-600 mb-2">
+        Progress
+      </label>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-gray-500">{percentage.toFixed(1)}%</p>
+      </div>
+      <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+        <div
+          className="bg-blue-500 h-3 rounded-full transition-all duration-500"
+          style={{
+            width: `${
+              currentAmount > targetAmount ? "100" : percentage
+            }%`,
+          }}
+        ></div>
+      </div>
+    </div>
 
-              {isAddedfunds && (<div>
-                <label>Funds Amount</label>
-                <input 
-                value={fundsAmount}
-                onChange={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setFundsAmount(Number(e.target.value))
-                }}
-                type="number" />
-              </div>)}
+    {isAddedfunds && (
+      <div>
+        <label className="block text-sm font-semibold text-gray-600 mb-1">
+          Funds Amount
+        </label>
+        <input
+          value={fundsAmount}
+          onChange={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setFundsAmount(Number(e.target.value));
+          }}
+          type="number"
+          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+      </div>
+    )}
 
-              <div className="my-[0.5rem] flex flex-wrap gap-4">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsAddedFunds(prev => !prev)
-                  }}
-                >{isAddedfunds ? "Cancle" : "Added Funds"}</button>
-                <Link
-                  to={`/dashboard/edit-target/${targetId}`}
-                  className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800"
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (!targetId) {
-                      alert("Cannot delete selected data");
-                      return;
-                    }
-                    deleteTarget.mutate({ userId: getUserId, targetId });
-                  }}
-                  className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    {/* Action Buttons */}
+    <div className="flex flex-wrap gap-4 justify-center pt-4 border-t">
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsAddedFunds((prev) => !prev);
+        }}
+        className="py-2 px-6 rounded-lg bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition-all"
+      >
+        {isAddedfunds ? "Cancel" : "Add Funds"}
+      </button>
+
+      <Link
+        to={`/dashboard/edit-target/${targetId}`}
+        className="py-2 px-6 rounded-lg bg-yellow-100 text-yellow-800 font-semibold hover:bg-yellow-200 transition-all"
+      >
+        Edit
+      </Link>
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!targetId) {
+            alert("Cannot delete selected data");
+            return;
+          }
+          deleteTarget.mutate({ userId: getUserId, targetId });
+        }}
+        className="py-2 px-6 rounded-lg bg-red-100 text-red-800 font-semibold hover:bg-red-200 transition-all"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
       )}
     </>
   );
