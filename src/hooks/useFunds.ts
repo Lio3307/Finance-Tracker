@@ -1,4 +1,4 @@
-import { addDoc, collection, query,  where, getDocs } from "firebase/firestore";
+import { addDoc, collection, query,  where, getDocs, doc, updateDoc, increment } from "firebase/firestore";
 import { db } from "../config/firebase";
 import type { Funds } from "../type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -6,8 +6,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const addFunds = async ({userId, targetId, newFunds}: {userId: string, targetId: string, newFunds: Funds}) => {
 
         const collRef = collection(db, "Users", userId, "Target", targetId, "Funds")
-        await addDoc(collRef, newFunds)
+        await addDoc(collRef, {...newFunds})
 
+        const targetDocRef = doc(db, "Users", userId, "Target", targetId)
+        await updateDoc(targetDocRef, {
+            currentAmount: increment(Number(newFunds.fundsAmount)),
+        })
 
 
     return {...newFunds}
@@ -41,7 +45,7 @@ const getFunds = async ({userId, targetId}: {userId: string, targetId: string}) 
         throw new Error(`Cannot get data : ${err}`);
         
     }
-    return []
+    return [];
 }
 
 const useFetchFunds = (userId:string, targetId:string) => {

@@ -5,9 +5,12 @@ import { auth, db } from "../../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { TargetData } from "../../../type";
 import useDeleteTarget from "../../../hooks/useDeleteTarget";
+import { useAddFunds } from "../../../hooks/useFunds";
 
 const DetailTarget = () => {
   const { targetId } = useParams();
+
+  const mutation = useAddFunds()
 
   const [getUserId, setGetUserId] = useState<string>("");
 
@@ -122,10 +125,21 @@ const DetailTarget = () => {
           type="number"
           className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
+        <button onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          if(!targetId || !fundsAmount){
+            alert("Unknown Target Id, or undefined funds amount!")
+            return
+          }
+          mutation.mutate({userId: getUserId, targetId: targetId, newFunds: {
+            fundsAmount,
+            targetId,
+          }})
+        }}>Add Funds</button>
       </div>
     )}
 
-    {/* Action Buttons */}
     <div className="flex flex-wrap gap-4 justify-center pt-4 border-t">
       <button
         onClick={(e) => {
