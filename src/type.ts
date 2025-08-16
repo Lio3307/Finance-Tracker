@@ -18,3 +18,8 @@ export type TargetData = {
   currentAmount:number
   targetId?: string
 }
+
+export type Funds = {
+  fundsAmount: number
+  fundsId?:string
+}

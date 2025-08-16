@@ -13,12 +13,14 @@ const DetailTarget = () => {
 
   const deleteTarget = useDeleteTarget();
 
+  const [isAddedfunds, setIsAddedFunds] = useState<boolean>(false);
+  const [fundsAmount, setFundsAmount] = useState<number>(1)
+
   const [targetName, setTargetName] = useState<string>("");
   const [targetAmount, setTargetAmount] = useState<number>(0);
   const [currentAmount, setCurrentAmount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-  
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -47,7 +49,7 @@ const DetailTarget = () => {
 
     return () => unsubs();
   }, [targetId]);
-  
+
   const percentage = (currentAmount / targetAmount) * 100;
 
   return (
@@ -65,36 +67,28 @@ const DetailTarget = () => {
 
             <div className="space-y-5">
               <div>
-                <label
-                  className="block text-sm font-bold text-gray-700 mb-1"
-                >
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Target Name
                 </label>
                 <p>{targetName}</p>
               </div>
 
               <div>
-                <label
-                  className="block text-sm font-bold text-gray-700 mb-1"
-                >
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Target Amount
                 </label>
                 <p>{targetAmount}</p>
               </div>
 
               <div>
-                <label
-                  className="block text-sm font-bold text-gray-700 mb-1"
-                >
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Current Amount
                 </label>
                 <p>{currentAmount}</p>
               </div>
 
               <div>
-                <label
-                  className="block text-sm font-bold text-gray-700 mb-1"
-                >
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Progress
                 </label>
                 <p className="text-sm text-gray-500 mt-1">
@@ -112,12 +106,31 @@ const DetailTarget = () => {
                 </div>
               </div>
 
+              {isAddedfunds && (<div>
+                <label>Funds Amount</label>
+                <input 
+                value={fundsAmount}
+                onChange={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setFundsAmount(Number(e.target.value))
+                }}
+                type="number" />
+              </div>)}
+
               <div className="my-[0.5rem] flex flex-wrap gap-4">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsAddedFunds(prev => !prev)
+                  }}
+                >{isAddedfunds ? "Cancle" : "Added Funds"}</button>
                 <Link
                   to={`/dashboard/edit-target/${targetId}`}
                   className="py-4 px-6 rounded-[0.6rem] bg-indigo-100 cursor-pointer text-indigo-800"
                 >
-                  Update
+                  Edit
                 </Link>
                 <button
                   onClick={(e) => {
@@ -127,7 +140,7 @@ const DetailTarget = () => {
                       alert("Cannot delete selected data");
                       return;
                     }
-                    deleteTarget.mutate({userId: getUserId, targetId});
+                    deleteTarget.mutate({ userId: getUserId, targetId });
                   }}
                   className="py-4 px-6 rounded-[0.6rem] bg-red-100 cursor-pointer text-red-800"
                 >
