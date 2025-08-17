@@ -11,6 +11,8 @@ const getLatestTransaction = async (userId: string) => {
         if(!docSnap.empty){
             const doc = docSnap.docs[0]
             return {...doc.data() as TransactionData} 
+        } else {
+            return []
         }
     } catch (err) {
         throw new Error(`Cannot get latest data : ${err}`);
