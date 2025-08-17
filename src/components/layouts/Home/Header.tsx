@@ -45,10 +45,10 @@ const Header = () => {
           } flex-col md:flex md:flex-row md:items-center md:mr-auto md:ml-8 w-full md:w-auto text-base justify-center space-y-4 md:space-y-0 md:space-x-8 mt-4 md:mt-0`}
         >
           <a className="text-gray-700 hover:cursor-pointer hover:text-indigo-600 font-medium text-center md:text-left">
-            Features
+            About Us
           </a>
           <a className="text-gray-700 hover:cursor-pointer hover:text-indigo-600 font-medium text-center md:text-left">
-            Pricing
+            Features
           </a>
           <a className="text-gray-700 hover:cursor-pointer hover:text-indigo-600 font-medium text-center md:text-left">
             Testimonials

@@ -1,21 +1,62 @@
+import { motion } from "motion/react";
+
 const Features = () => {
   return (
     <div className="bg-transparent relative z-30">
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="text-blue-600 font-semibold text-lg tracking-wide uppercase">
-              WHY CHOOSE US
-            </span>
-            <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
-              Powerful Finance Tracking Features
-            </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
-              Tools and insights designed to help you take control of your money
-              and reach your financial goals.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+                delay: 0.2,
+              }}
+            >
+              <span className="text-blue-600 font-semibold text-lg tracking-wide uppercase">
+                WHY CHOOSE US
+              </span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+                delay: 0.2,
+              }}
+            >
+              <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+                Powerful Finance Tracking Features
+              </h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+                delay: 0.2,
+              }}
+            >
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
+                Tools and insights designed to help you take control of your
+                money and reach your financial goals.
+              </p>
+            </motion.div>
           </div>
 
+            <motion.div
+            initial={{opacity:0}}
+            whileInView={{opacity:1}}
+            transition={{
+              duration: 0.3,
+              ease:"easeIn",
+              delay: 0.3,
+            }}
+            >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div className="bg-white border border-gray-200 p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
@@ -141,6 +182,7 @@ const Features = () => {
               </p>
             </div>
           </div>
+          </motion.div>
         </div>
       </section>
     </div>
