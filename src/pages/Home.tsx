@@ -1,18 +1,23 @@
-import Header from "../components/layouts/Home/Header";
-import HeroSection from "../components/layouts/Home/HeroSection";
-import AboutUs from "../components/layouts/Home/AboutUs";
-import Features from "../components/layouts/Home/Features";
-import Testimonial from "../components/layouts/Home/Testimonial";
-import Faq from "../components/layouts/Home/Faq";
-import Footer from "../components/layouts/Home/Footer";
-import CTA from "../components/layouts/Home/CTA";
+import { lazy, Suspense } from "react";
+
+const Header = lazy(() => import("../components/layouts/Home/Header"));
+const HeroSection = lazy(
+  () => import("../components/layouts/Home/HeroSection")
+);
+const AboutUs = lazy(() => import("../components/layouts/Home/AboutUs"));
+const Features = lazy(() => import("../components/layouts/Home/Features"));
+const Testimonial = lazy(
+  () => import("../components/layouts/Home/Testimonial")
+);
+const Faq = lazy(() => import("../components/layouts/Home/Faq"));
+const Footer = lazy(() => import("../components/layouts/Home/Footer"));
+const CTA = lazy(() => import("../components/layouts/Home/CTA"));
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-
 const Home = () => {
-    useEffect(() => {
+  useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (user) {
         window.location.href = "/dashboard/home";
@@ -25,14 +30,22 @@ const Home = () => {
   }, []);
   return (
     <>
-      <Header />
-      <HeroSection />
-      <AboutUs />
-      <Features />
-      <Testimonial />
-      <Faq />
-      <CTA />
-      <Footer />
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+          </div>
+        }
+      >
+        <Header />
+        <HeroSection />
+        <AboutUs />
+        <Features />
+        <Testimonial />
+        <Faq />
+        <CTA />
+        <Footer />
+      </Suspense>
     </>
   );
 };

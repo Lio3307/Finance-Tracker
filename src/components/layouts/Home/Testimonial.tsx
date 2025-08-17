@@ -39,6 +39,7 @@ const Testimonial = () => {
                   src="https://randomuser.me/api/portraits/women/54.jpg"
                   alt="Jane Cooper"
                   className="h-10 w-10 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <p className="pt-2 text-sm font-semibold text-gray-900">
                   Jane Cooper
@@ -64,6 +65,7 @@ const Testimonial = () => {
                   src="https://randomuser.me/api/portraits/women/30.jpg"
                   alt="Emily Smith"
                   className="h-10 w-10 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <p className="pt-2 text-sm font-semibold text-gray-900">
                   Emily Smith
@@ -89,6 +91,7 @@ const Testimonial = () => {
                   src="https://randomuser.me/api/portraits/women/90.jpg"
                   alt="Sarah Brown"
                   className="h-10 w-10 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <p className="pt-2 text-sm font-semibold text-gray-900">
                   Sarah Brown
@@ -115,6 +118,7 @@ const Testimonial = () => {
                   src="https://randomuser.me/api/portraits/men/90.jpg"
                   alt="James White"
                   className="h-10 w-10 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <p className="pt-2 text-sm font-semibold text-gray-900">
                   James White

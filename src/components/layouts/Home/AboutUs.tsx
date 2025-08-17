@@ -20,6 +20,7 @@ const AboutUs = () => {
                 className="object-cover object-center rounded"
                 alt="hero"
                 src="https://dummyimage.com/720x600"
+                loading="lazy"
               />
             </div>
           </motion.div>
