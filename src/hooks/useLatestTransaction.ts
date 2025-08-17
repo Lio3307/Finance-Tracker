@@ -16,7 +16,6 @@ const getLatestTransaction = async (userId: string) => {
         }
     } catch (err) {
         throw new Error(`Cannot get latest data : ${err}`);
-        
     }
 }
 

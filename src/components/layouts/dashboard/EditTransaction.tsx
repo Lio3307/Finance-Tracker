@@ -4,9 +4,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import type { TransactionData } from "../../../type";
+import { useQueryClient } from "@tanstack/react-query";
 
 const EditTransaction = () => {
   const { editId } = useParams();
+  const queryClient = useQueryClient();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [editing, setEditing] = useState<boolean>(false);
@@ -39,6 +41,7 @@ const EditTransaction = () => {
         context: newContext,
         amount: newAmount,
       });
+      queryClient.invalidateQueries({ queryKey: ["transaction"] });
       setEditing(false);
       alert("Data successfully updated!!");
     } catch (err) {
