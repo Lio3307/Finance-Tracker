@@ -8,6 +8,7 @@ const AboutUs = () => {
     <>
       <section className="text-gray-400 bg-transparent relative z-30 body-font">
         <div className="container mx-auto flex px-5 py-[8rem] md:flex-row flex-col items-center">
+          {/* Container Gambar */}
           <motion.div
             initial={{
               opacity: 0,
@@ -16,10 +17,12 @@ const AboutUs = () => {
             }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
+            // Tambahkan kelas flexbox untuk menengahkan konten di mobile
+            className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10 flex justify-center"
           >
             <div className="md:mb-0 mb-10">
               <img
-                className="object-cover object-center rounded"
+                className="object-cover object-center rounded w-full"
                 alt="hero"
                 src="https://dummyimage.com/720x600"
                 loading="lazy"
