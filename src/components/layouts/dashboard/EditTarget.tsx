@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useQueryClient } from "@tanstack/react-query";
 
 const EditTarget = () => {
   const { editTargetId } = useParams();
@@ -10,6 +11,8 @@ const EditTarget = () => {
   const [newTargetAmount, setNewTargetAmount] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
+
+  const queryClient = useQueryClient()
 
   const handleEditTarget = async () => {
     if (!newTargetName.trim() || !newTargetAmount) {
@@ -38,6 +41,7 @@ const EditTarget = () => {
         targetName: newTargetName,
         targetAmount: newTargetAmount,
       });
+      queryClient.invalidateQueries({queryKey: ["targets"]})
       alert("Successfully updating data");
       setIsUpdate(false);
     } catch (err) {
