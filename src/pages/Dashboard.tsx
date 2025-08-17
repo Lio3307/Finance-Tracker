@@ -11,7 +11,6 @@ const Dashboard = () => {
     useEffect(() => {
     const unsubs = onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        alert("you have to register first!!")
         window.location.href = "/";
         return;
       }else {
