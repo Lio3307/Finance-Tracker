@@ -10,9 +10,8 @@ ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const TransactionChart = () => {
   const [getUserId, setUserId] = useState<string>("");
-  const { data, isLoading } = useFetchTransactions(getUserId, ""); // ambil semua transaksi
+  const { data, isLoading } = useFetchTransactions(getUserId, ""); 
 
-  // ambil UID user yang login
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -27,20 +26,16 @@ const TransactionChart = () => {
   const chartData = useMemo(() => {
     if (!data) return null;
 
-    // ambil tanggal hari ini (format YYYY-MM-DD)
     const today = new Date().toISOString().split("T")[0];
 
-    // Filter transaksi yang terjadi hari ini
     const todayTransactions = data.filter((tx) => {
       if (!tx.created) return false;
 
       let createdDate: string;
 
       if (tx.created instanceof Timestamp) {
-        // kalau pakai serverTimestamp dari Firestore
         createdDate = tx.created.toDate().toISOString().split("T")[0];
       } else if (typeof tx.created === "string") {
-        // fallback kalau ada data lama yang masih string
         createdDate = new Date(tx.created).toISOString().split("T")[0];
       } else {
         return false;
@@ -49,7 +44,6 @@ const TransactionChart = () => {
       return createdDate === today;
     });
 
-    // Hitung total Income & Expenses
     const incomeTotal = todayTransactions
       .filter((tx) => tx.type === "Income")
       .reduce((acc, tx) => acc + tx.amount, 0);
@@ -65,8 +59,8 @@ const TransactionChart = () => {
           label: "Today",
           data: [incomeTotal, expenseTotal],
           backgroundColor: [
-            "rgba(75, 192, 192, 0.7)", // hijau: income
-            "rgba(255, 99, 132, 0.7)", // merah: expenses
+            "rgba(75, 192, 192, 0.7)",
+            "rgba(255, 99, 132, 0.7)", 
           ],
           borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
           borderWidth: 1,
