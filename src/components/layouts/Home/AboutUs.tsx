@@ -15,14 +15,14 @@ const AboutUs = () => {
               y: isMobile ? 50 : 0,
             }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2, }}
+            transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2 }}
             className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10 flex justify-center"
           >
             <div className="md:mb-0 mb-10">
               <img
                 className="object-cover object-center rounded w-full"
                 alt="hero"
-                src="https://dummyimage.com/720x600"
+                src="https://images.pexels.com/photos/5312060/pexels-photo-5312060.jpeg?auto=compress&cs=tinysrgb&h=600&w=720&fit=crop"
                 loading="lazy"
               />
             </div>
