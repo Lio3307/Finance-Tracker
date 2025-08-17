@@ -23,7 +23,7 @@ const DashboardHome = () => {
 
       <LatestTransaction />
 
-      <div>
+      <div className="my-[3rem]">
         <TransactionChart/>
       </div>
 
