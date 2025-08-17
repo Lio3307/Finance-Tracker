@@ -6,6 +6,7 @@ import { auth } from "../../../config/firebase";
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
 
   const { signInWithEmail, loading } = useAuth();
 
@@ -66,7 +67,7 @@ const SignIn = () => {
                   setPassword(e.target.value);
                 }}
                 value={password}
-                type="password"
+                type={isShowPassword ? "text" : "password"}
                 id="signin-password"
                 name="signin-password"
                 placeholder="••••••••"
@@ -76,6 +77,10 @@ const SignIn = () => {
 
             <div className="flex items-center gap-2 mb-4">
               <input
+              onChange={(e) => {
+                e.stopPropagation()
+                setIsShowPassword(prev => !prev)
+              }}
                 type="checkbox"
                 id="show-password"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
@@ -95,7 +100,11 @@ const SignIn = () => {
                 hanldeSignIn();
               }}
               disabled={loading}
-              className={`mt-[0.4rem] w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${loading ? 'hover:cursor-not-allowed' : 'hover:from-indigo-600 hover:to-indigo-800'} rounded-lg text-lg shadow-md transition-all`}
+              className={`mt-[0.4rem] w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-indigo-500 to-indigo-700 border-0 py-3 px-8 focus:outline-none ${
+                loading
+                  ? "hover:cursor-not-allowed"
+                  : "hover:from-indigo-600 hover:to-indigo-800"
+              } rounded-lg text-lg shadow-md transition-all`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
