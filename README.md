@@ -46,10 +46,10 @@ Make sure you have the following installed on your machine:
 ### Cloning the Repository
 
 ```bash
-git clone https://github.com/your-username/fint.git
+git clone https://github.com/Lio3307/Finance-Tracker
 cd fint
 ```
-**Note:** Please replace `your-username` with the actual username of the repository owner.
+
 
 ### Installation
 
