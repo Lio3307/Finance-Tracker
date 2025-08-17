@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, } from "../../../config/firebase";
 import useLatestTransaction from "../../../hooks/useLatestTransaction";
+import type { TransactionData } from "../../../type";
 
 const LatestTransaction = () => {
   const [getUserId, setGetUserId] = useState<string>("")
 
   const {data, isLoading, isError, error} = useLatestTransaction(getUserId)
 
-  const transactionData = data;
+  const transactionData = data as TransactionData;
 
   const setDate = new Date();
   const currentDate = `${setDate.getDate()}/${
