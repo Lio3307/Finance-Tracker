@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
 import useFetchTransactions from "../../../hooks/useFetchTransactions";
 
-const TableTransaction = () => {
+const TableTransaction = ({typeSort}: {typeSort: string}) => {
   const [idUser, setIdUser] = useState<string | null>(null);
   useEffect(() => {
     const unsubs = onAuthStateChanged(auth, (user) => {
@@ -15,7 +15,7 @@ const TableTransaction = () => {
 
     return () => unsubs();
   }, []);
-  const { data, isLoading, isError, error } = useFetchTransactions(idUser!);
+  const { data, isLoading, isError, error } = useFetchTransactions(idUser!, typeSort);
   const mutation = useDeleteTransaction()
 
   const dataUser = Array.isArray(data) ? data : [];
