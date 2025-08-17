@@ -1,4 +1,4 @@
-import { FieldValue } from "firebase/firestore";
+import {  FieldValue, Timestamp } from "firebase/firestore";
 
 export type TransactionData = {
   userId: string;
@@ -6,7 +6,8 @@ export type TransactionData = {
   context: string;
   amount: number;
   type: string;
-  created: string | FieldValue;
+  date: string
+  created: Timestamp | FieldValue;
   transactionId?: string
 };
 

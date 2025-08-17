@@ -3,9 +3,11 @@ import ModalTransaction from "./ModalTransaction";
 import TableTransaction from "./TableTransaction";
 
 import { useState } from "react";
+import TransactionChart from "./TransactionChart";
 
 const DashboardHome = () => {
   const [sortByType, setSortByType] = useState<string>("");
+
   return (
     <>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-[3rem] md:mt-0 gap-4 mb-6">
@@ -20,6 +22,10 @@ const DashboardHome = () => {
       </div>
 
       <LatestTransaction />
+
+      <div>
+        <TransactionChart/>
+      </div>
 
       <div className="flex my-[2rem]">
         <ModalTransaction />

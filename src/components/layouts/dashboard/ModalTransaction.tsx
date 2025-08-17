@@ -13,6 +13,10 @@ const ModalTransaction = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const mutation = useAddTransaction();
+    const setDate = new Date();
+  const currentDate = `${setDate.getDate()}/${
+    setDate.getMonth() + 1
+  }/${setDate.getFullYear()}`;
 
   const handleTransaction = async () => {
     if (!name.trim() || !context.trim() || !amount) {
@@ -32,6 +36,7 @@ const ModalTransaction = () => {
         context,
         amount,
         type,
+        date: currentDate,
         created: serverTimestamp(),
       });
 
